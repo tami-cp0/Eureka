@@ -40,8 +40,10 @@ $(() => {
     const confirm_password = $('#confirm').val().trim();
 
     if (password === confirm_password) {
+      $('#submit').prop('disabled', false);
       $('#confirm').parent().parent().css('box-shadow', 'none');
     } else {
+      $('#submit').prop('disabled', true);
       $('#confirm').parent().parent().css('box-shadow', 'inset 0 0 0 2px red');
     }
   })
