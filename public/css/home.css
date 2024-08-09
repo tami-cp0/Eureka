@@ -54,8 +54,3 @@ h1 {
 .recents p {
     color: var(--subtext-color);
 }
-
-body footer {
-    height: 80px;
-    border: 1px solid yellow;
-}
