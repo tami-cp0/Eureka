@@ -1,0 +1,212 @@
+@import 'normalize.css';
+
+:root {
+    --primary-color: #EDF2F7;
+    --secondary-color: #1A202C;
+    --background-color: #E2F0FE;
+    --sub-background: #283041;
+    --subtext-color: #6A6E72;
+    --sub: #91B3FA;
+}
+
+body {
+    background: var(--background-color);
+    color: var(--secondary-color);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.center {
+    background-color: var(--primary-color);
+    width: 80%;
+    height: 800px;
+    margin: 0 auto;
+    border: 2px solid var(--secondary-color);
+    display: flex;
+}
+
+/* left side */
+.left-section {
+    width: 50%;
+}
+
+.left-section .text {
+    margin-top: 70px;
+    margin-left: 65px;
+}
+
+.text h1 {
+    font-family: 'Playfair Display';
+    font-size: 40px;
+    margin: 0;
+}
+
+.text p {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+img {
+    margin-left: 34px;
+    width: 550px;
+    height: 550px;
+}
+
+/* right side */
+.right-section {
+    width: 50%;
+    background-color: var(--secondary-color);
+}
+
+.right-section nav {
+    margin-top: 40px;
+    display: flex;
+    justify-content: end;
+}
+
+.right-section nav ul {
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+}
+
+.right-section nav li {
+    margin: 0 10px;
+    list-style-type: none;
+}
+
+.right-section a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.right-section .text {
+    width: 70%;
+    margin: 0 auto;
+    color: var(--primary-color);
+}
+
+span {
+    color: var(--sub);
+}
+
+.right-section span > a {
+    color: var(--sub);
+}
+
+.right-section h3 {
+    font-size: 36px;
+    font-family: 'Playfair Display';
+    margin: 0;
+    margin-top: 30px;
+}
+
+.right-section p {
+    font-size: 14px;
+}
+
+
+form {
+    width: 70%;
+    height: 280px;
+    border-radius: 20px;
+    margin: 0 auto;
+    border: 2px solid var(--primary-color);
+    margin-top: 20px;
+    display: flex; 
+    flex-direction: column;
+}
+
+form div.name {
+    margin: 0px 30px;
+    margin-top: 20px;
+    height: 70px;
+    display: flex;
+    width: auto;
+    justify-content: space-between;
+    background-color: var(--secondary-color);
+}
+
+form .first_name, .last_name {
+    background-color: var(--sub-background);
+    width: 47%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+form input{
+    border: none;
+    text-decoration: none;
+    width: 80%;
+    height: 30px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    outline: none;
+    color: var(--primary-color);
+    background-color: var(--sub-background);
+}
+
+form label {
+    color: var(--subtext-color);
+    margin-left: 15px;
+    font-size: 12px;
+}
+
+form div div input:focus + label {
+    color: var(--primary-color);
+}
+
+form img {
+    width: 20px;
+    height: auto;
+    cursor: pointer;
+}
+
+form .credential {
+    margin: 0px 30px;
+    margin-top: 20px;
+    height: 70px;
+    background-color: var(--sub-background);
+    border-radius: 15px;
+    display: flex;
+}
+
+.credential input {
+    width: 90%;
+}
+
+.email, .password, .confirm {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+form div img {
+    margin: 0;
+    margin-right: 15px;
+    color: var(--primary-color);
+}
+
+.email + img {
+    cursor: auto;
+}
+
+form #submit {
+    width: 60%;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 15px;
+    background-color: var(--primary-color);
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+

@@ -1,0 +1,96 @@
+@import '../normalize.css';
+
+:root {
+    --primary-color: #EDF2F7;
+    --secondary-color: #1A202C;
+    --background-color: #E2F0FE;
+    --sub-background: #283041;
+    --subtext-color: #6A6E72;
+    --sub: #91B3FA;
+}
+
+.header {
+    height: 90px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    margin: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header article {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header article h1 {
+    font-size: 30px;
+    font-family: 'Playfair Display';
+}
+
+.header article > div {
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+
+.searchBar input {
+    width: 350px;
+    height: 40px;
+    background-color: #E0E2E4;
+    outline: none;
+    border: none;
+    color: (26, 32, 44, 0.2);
+    border-radius: 20px;
+    text-indent: 40px;
+}
+
+.searchBar img {
+    width: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.header p {
+    margin-left: 30px;
+    width: 60px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Inter';
+}
+
+.header p:hover {
+    font-weight: bold;
+}
+
+.header .profilePic {
+    margin-left: 35px;
+    background-color: var(--secondary-color);
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.home-header .homeBtn {
+    font-weight: bold;
+}
+
+.publish-header .publishBtn {
+    font-weight: bold;
+}
+
+.courses-header .coursesBtn{
+    font-weight: bold;
+}
+
+.settings-header .settingsBtn {
+    font-weight: bold;
+}

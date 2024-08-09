@@ -1,0 +1,61 @@
+@import 'normalize.css';
+
+:root {
+    --primary-color: #EDF2F7;
+    --secondary-color: #1A202C;
+    --background-color: #E2F0FE;
+    --sub-background: #283041;
+    --subtext-color: #6A6E72;
+    --sub: #91B3FA;
+}
+
+body {
+    height: auto;
+    background-color: #F5F5F5;
+    border: 1px solid transparent;
+}
+
+body > section {
+    border: 1px solid blue;
+    height: 500px;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.publishMsg {
+    margin-top: 90px;
+}
+
+.publishMsg h1 {
+    margin-top: 40px;
+}
+
+h1 {
+    font-weight: 400;
+}
+
+.publishMsg p {
+    width: 50%;
+}
+
+.publishMsg a {
+    display: flex;
+    background-color: var(--secondary-color);
+    width: 15%;
+    height: 30px;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    border-radius: 5px;
+    color: var(--primary-color);
+}
+
+.recents p {
+    color: var(--subtext-color);
+}
+
+body footer {
+    height: 80px;
+    border: 1px solid yellow;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eureka</title>
+    <link rel="stylesheet" href="../public/css/login.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../public/scripts/login.js" defer></script>
+</head>
+<body>
+    <section class="center">
+        <article class="left-section">
+            <div class="text">
+                <h1>Eureka</h1>
+                <p>Discover The Joy of Learning</p>
+            </div>
+            <img src="../public/images/center.svg">
+        </article>
+        <article class="right-section">
+            <nav>
+                <ul>
+                  <li><a href="#about">About</a></li>
+                  <li><a href="#help">Help</a></li>
+                </ul>
+            </nav>
+            <div class="text">
+                <h3>Login to your account</h3>
+                <p>Don't have an account? <span><a href="#signup">create a new one</a></span></p>
+            </div>
+            <form action="/submit-form" method="post">
+                <div class="credential">
+                    <div class="email">
+                        <input type="email" id="email" name="email">
+                        <label for="email">E-mail</label>
+                    </div>
+                    <img src="../public/images/mail.svg">
+                </div>
+              
+                <div class="credential">
+                    <div class="password">
+                        <input type="password" id="password" name="password">
+                        <label for="password">Password</label>
+                    </div>
+                    <img id="eye" class="hide" src="../public/images/closedeye.svg">
+                </div>
+
+                <input type="submit" value="Create account" id="submit">
+            </form>
+        </article>
+    </section>
+</body>
+</html>
