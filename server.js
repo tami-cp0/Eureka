@@ -22,6 +22,14 @@ server.use('/home', (req, res) => {
   res.render('home');
 });
 
+server.use('/browse', (req, res) => {
+  res.render('courses/browse');
+});
+
+server.use('/ongoing', (req, res) => {
+  res.render('courses/ongoing');
+});
+
 const PORT = process.env.PORT || 6789;
 server.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);

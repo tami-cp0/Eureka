@@ -1,0 +1,127 @@
+:root {
+    --primary-color: #EDF2F7;
+    --secondary-color: #1A202C;
+    --background-color: #E2F0FE;
+    --sub-background: #283041;
+    --subtext-color: #6A6E72;
+    --sub: #91B3FA;
+    --body: #f5f5f5;
+}
+
+/* show more button for cards */
+.showmore {
+    width: 10%;
+    height: 40px;
+    margin-top: 40px;
+    box-shadow: inset 0 0 0 2px var(--sub-background);
+    color: var(--sub-background);
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-weight: 600;
+    cursor: pointer;
+
+    background: linear-gradient(var(--sub-background) 0 0) var(--p, 0) / var(--p, 0) no-repeat;
+    transition: .4s, background-position 0s;
+}
+
+.showmore:hover {
+    --p: 100%;
+    color: var(--primary-color);
+}
+/* end */
+
+.cards {
+    display: flex;
+    gap: 38px;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+
+.card {
+    background-color: var(--sub-background);
+    color: var(--primary-color);
+    width: 400px;
+    height: 350px;
+    padding: 2px;
+    border-top-right-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    cursor: pointer;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+    border-top-left-radius: 5px;
+    backdrop-filter: blur(15px);
+    transition: box-shadow .3s ease;
+    overflow: hidden;
+}
+.card:hover {
+    --i: 1;
+    box-shadow: 
+  rgba(0, 0, 0, 0.4) 0px 4px 8px,  /* Increased size and spread */
+  rgba(0, 0, 0, 0.3) 0px 10px 20px -3px,  /* Increased size and spread */
+   var(--primary-color) 0px 0px 0px 5px inset;  /* Increased inset shadow */
+
+}
+
+.card > img {
+    width: 390px;
+    max-height: 200px;
+    margin: 0 auto;
+    margin-top: 1px;
+    border: 3px solid var(--primary-color);
+    border-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+
+
+.card .niche {
+    background-color: rgba(237, 242, 247, 0.1);
+    color:  rgba(237, 242, 247, 0.8);
+    font-weight: 100;
+    margin-top: 15px;
+    margin-left: 10px;
+    padding: 10px;
+    width: 40px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.card .heading {
+    display: flex;
+    width: 380px;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 8px;
+}
+
+.card .heading h5 {
+    font-size: 16px;
+    max-height: 35px;
+    max-width: 280px;
+    width: auto;
+    word-wrap: break-word;
+}
+
+.card .heading > img, .heading > p{
+    color:  rgba(237, 242, 247, 0.8); 
+    font-size: 12px;
+}
+
+.card .author {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 100;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card .card-footer {
+    margin-left: 10px;
+}

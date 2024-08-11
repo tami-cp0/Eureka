@@ -1,0 +1,12 @@
+@import 'normalize.css';
+@import '../partials/cards.css';
+
+:root {
+    --primary-color: #EDF2F7;
+    --secondary-color: #1A202C;
+    --background-color: #E2F0FE;
+    --sub-background: #283041;
+    --subtext-color: #6A6E72;
+    --sub: #91B3FA;
+    --body: #f5f5f5;
+}

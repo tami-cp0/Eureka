@@ -1,0 +1,48 @@
+@import 'normalize.css';
+@import '../partials/cards.css';
+
+:root {
+    --primary-color: #EDF2F7;
+    --secondary-color: #1A202C;
+    --background-color: #E2F0FE;
+    --sub-background: #283041;
+    --subtext-color: #6A6E72;
+    --sub: #91B3FA;
+    --body: #f5f5f5;
+}
+
+.progress div:first-child {
+    display: flex;
+    align-items: center;
+}
+
+.progress div:first-child p {
+    font-weight: 600;
+}
+
+.progress div:last-child {
+    position: relative;
+    width: 100%;
+}
+
+.progress div:last-child p {
+    height: 30px;
+    background-color: rgba(145, 179, 250, 0.2);
+    border-radius: 20px;
+    border: 2px solid var(--sub-background);
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+}
+
+.cards > div {
+    margin-bottom: 50px;
+}
+.progress div p.progressBar {
+    width: 37%;
+    background-color: var(--sub-background);
+    z-index: 1;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+

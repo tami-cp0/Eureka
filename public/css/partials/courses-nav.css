@@ -1,0 +1,99 @@
+@import 'normalize.css';
+
+:root {
+    --primary-color: #EDF2F7;
+    --secondary-color: #1A202C;
+    --background-color: #E2F0FE;
+    --sub-background: #283041;
+    --subtext-color: #6A6E72;
+    --sub: #91B3FA;
+    --body: #f5f5f5;
+}
+
+/* for ALL the courses page */
+body {
+    background-color: var(--body);
+}
+
+body > section {
+    width: 90%;
+    margin: 0 auto;
+    height: auto;
+}
+
+.courses-view {
+    padding-top: 88px;
+    border: 1px solid transparent;
+    padding-bottom: 50px;
+}
+/* end*/
+
+
+article.courses {
+    background-color: var(--body);
+    padding: 30px 0px;
+    position: fixed;
+    width: 100%;
+    padding-top: 110px;
+    margin-right: 50px;
+    margin: 0 auto;
+    z-index: 999;
+}
+
+.cards {
+    margin-top: 135px;
+}
+
+nav.page {
+    width: 90%;
+    margin: 0 auto;
+}
+
+nav.page ul {
+    display: flex;
+    gap: 40px;
+    list-style-type: none;
+
+}
+
+nav.page a {
+    width: 100px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: inherit;
+}
+
+a {
+    background: 
+      linear-gradient(var(--sub-background) 0 0) no-repeat
+      calc(200% - var(--i, 0) * 100%) 100% / 200% 3px;
+    transition: .3s calc(var(--i, 0) * .3s), background-position .3s calc(.3s - calc(var(--i, 0) * .3s));
+}
+
+a:hover {
+    --i: 1;
+    font-weight: bold;
+}
+
+.browse-nav .browseBtn {
+    font-weight: bold;
+    box-shadow: inset 0 -3px 0 var(--sub-background);
+}
+
+.ongoing-nav .ongoingBtn {
+    font-weight: bold;
+    box-shadow: inset 0 -3px 0 var(--sub-background);
+}
+
+.published-nav .publishBtn {
+    font-weight: bold;
+    box-shadow: inset 0 -3px 0 var(--sub-background);
+}
+
+.drafts-nav .draftsBtn {
+    font-weight: bold;
+    box-shadow: inset 0 -3px 0 var(--sub-background);
+}
