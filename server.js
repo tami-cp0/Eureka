@@ -1,36 +1,13 @@
 import express from 'express';
-import path, { normalize } from 'path';
 
-const server  = express();
+const app  = express();
+const port = process.env.PORT || 6789;
 
-// Middleware
-server.use(express.json());
-// serve the assets
-server.use('/public', express.static(__dirname + '/public'));
-// Set the view engine to EJS
-server.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
+app.use(express.json({ limit: '5mb' }));
+app.use('/public', express.static(__dirname + '/public'));
+app.use(router);
 
-server.use('/signup', (req, res) => {
-  res.render('signup');
-});
-
-server.use('/login', (req, res) => {
-  res.render('login');
-});
-
-server.use('/home', (req, res) => {
-  res.render('home');
-});
-
-server.use('/browse', (req, res) => {
-  res.render('courses/browse');
-});
-
-server.use('/drafts', (req, res) => {
-  res.render('courses/drafts');
-});
-
-const PORT = process.env.PORT || 6789;
-server.listen(PORT, () => {
+app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
 });
