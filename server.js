@@ -26,8 +26,8 @@ server.use('/browse', (req, res) => {
   res.render('courses/browse');
 });
 
-server.use('/ongoing', (req, res) => {
-  res.render('courses/ongoing');
+server.use('/drafts', (req, res) => {
+  res.render('courses/drafts');
 });
 
 const PORT = process.env.PORT || 6789;

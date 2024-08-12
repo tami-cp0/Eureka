@@ -1,0 +1,66 @@
+@import 'normalize.css';
+@import '../partials/cards.css';
+
+:root {
+    --primary-color: #EDF2F7;
+    --secondary-color: #1A202C;
+    --background-color: #E2F0FE;
+    --sub-background: #283041;
+    --subtext-color: #6A6E72;
+    --sub: #91B3FA;
+    --body: #f5f5f5;
+}
+
+
+img,
+.overlay {
+  transition: .3s all;
+  border-radius: 3px;
+}
+
+.card:hover {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 8px, rgba(0, 0, 0, 0.3) 0px 10px 20px -3px, var(--primary-color) 0px 0px 0px 0px inset;
+      .overlay {
+        opacity: 1;
+      }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: var(--secondary-color);
+    background-color: rgba(237, 242, 247, 0.2);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay > a {
+    width: auto;
+    text-align: center;
+    position: relative;
+    font-weight: 400;
+    padding: 10px 30px;
+    border-radius: 20px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+  .card > h6 {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 5px;
+  }
+
+
+
+  .card h6:first-of-type {
+    margin-top: 8px;
+  }
+
+  

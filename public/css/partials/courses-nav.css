@@ -37,7 +37,7 @@ article.courses {
     padding-top: 110px;
     margin-right: 50px;
     margin: 0 auto;
-    z-index: 999;
+    z-index: 800;
 }
 
 .cards {
@@ -64,16 +64,13 @@ nav.page a {
     align-items: center;
     cursor: pointer;
     color: inherit;
-}
-
-a {
     background: 
       linear-gradient(var(--sub-background) 0 0) no-repeat
       calc(200% - var(--i, 0) * 100%) 100% / 200% 3px;
     transition: .3s calc(var(--i, 0) * .3s), background-position .3s calc(.3s - calc(var(--i, 0) * .3s));
 }
 
-a:hover {
+nav.page a:hover {
     --i: 1;
     font-weight: bold;
 }
@@ -88,7 +85,7 @@ a:hover {
     box-shadow: inset 0 -3px 0 var(--sub-background);
 }
 
-.published-nav .publishBtn {
+.published-nav .publishedBtn {
     font-weight: bold;
     box-shadow: inset 0 -3px 0 var(--sub-background);
 }
