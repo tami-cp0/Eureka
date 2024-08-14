@@ -1,10 +1,14 @@
 import sha1 from 'sha1';
-import { ObjectId } from 'mongodb';
-import { v4 as uuidv4 } from 'uuid';
-import cache from '../db/cache.js';
 import DB from '../db/db.js';
 
 class AuthController {
+  /**
+   * Handles user authentication.
+   * Verifies the user's credentials and creates a session if valid.
+   * @param {Object} req - Express request object containing email and password in the body.
+   * @param {Object} res - Express response object used to render the login page on failure.
+   * @param {Function} next - Express next middleware function.
+   */
   static async connect(req, res, next) {
     const { email, password } = req.body;
 
@@ -17,39 +21,49 @@ class AuthController {
         return res.status(401).render('login', { error });
       }
 
-      const token = uuidv4();
-      const authToken = `auth_${token}`;
-      const duration = 24 * 3600;
+      // create user session
+      req.session.userId = user._id.toString();
 
-      // Store the user ID in Redis with the auth token as the key
-      const userId = user._id.toString();
-      await cache.set(authToken, userId, duration);
       return next();
     } catch (err) {
       console.log(err);
       const error = { message: '500 Internal server error' };
-      return res.status(401).render('login', { error });
+      return res.status(500).render('login', { error });
     }
   }
 
-  static async getDisconnect(req, res) {
-    // Retrieve token from request headers
-    const token = req.get('X-Token');
+  /**
+   * Handles user logout.
+   * Destroys the user's session and redirects to the login page.
+   * @param {Object} req - Express request object containing the session.
+   * @param {Object} res - Express response object used to redirect to login.
+   */
+  static async disconnect(req, res) {
+    req.session.destroy(err => {
+      if (err) {
+        console.log(err);
+        const error = { message: 'Failed to log out' };
+        return res.status(500).render('login', { error });
+      }
+      res.redirect('/login'); // Redirect to login page or any other page
+    });
+  }
 
-    // Get user ID from Redis using token
-    const id = new ObjectId(await redisClient.get(`auth_${token}`));
-    if (!id) {
-      return res.status(401).json({ error: 'Unauthorized' });
+  /**
+   * Middleware to ensure the user is logged in.
+   * Redirects to the login page if the user is not authenticated.
+   * @param {Object} req - Express request object containing the session.
+   * @param {Object} res - Express response object used to redirect to login.
+   * @param {Function} next - Express next middleware function.
+   */
+  static async loginRequired(req, res, next) {
+    if (req.session && req.session.userId) {
+      // User is logged in, proceed to the next middleware or route handler
+      return next();
+    } else {
+      // User is not logged in, redirect to the login page
+      res.redirect('/login');
     }
-
-    // ensure id is linked to a real user
-    const user = await dbClient.users.findOne({ _id: id });
-    if (!user) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
-
-    await redisClient.del(`auth_${token}`);
-    return res.status(204).send();
   }
 }
 

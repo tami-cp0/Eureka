@@ -4,13 +4,14 @@ import AuthController from "../controllers/AuthController.js";
 
 const router = Router()
 
-// Authentication
+// SignUp
 router.get('/signup', (req, res) => {
   const error = {};
   res.render('signup', { error });
 });
 router.post('/signup', UsersController.postNewUser);
 
+// Login
 router.get('/login', (req, res) => {
   const error = {};
   res.render('login', { error });
@@ -20,9 +21,7 @@ router.post('/login', AuthController.connect, (req, res) => {
 });
 
 
-// router.use('connect', )
-
-router.use('/home', (req, res) => {
+router.use('/home', AuthController.loginRequired,(req, res) => {
   res.render('home');
 });
 
