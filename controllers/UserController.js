@@ -1,38 +1,44 @@
 import sha1 from 'sha1';
-import { ObjectId } from 'mongodb';
-import dbClient from '../utils/db';
-import redisClient from '../utils/redis';
+import cache from '../db/cache.js';
+import DB from '../db/db.js';
 
 class UsersController {
-  static async postNew(req, res) {
-    const { email, password } = req.body;
+  static async postNewUser(req, res) {
+    const { firstName, lastName, email, password, confirm } = req.body;
+    let error;
 
-    if (!email) return res.status(400).send({ error: 'Missing email' });
+    if (!(email || password || firstName || lastName || confirm)) {
+      error = { message: 'Missing details'};
+      return res.status(401).render('signup', { error });
+    }
 
-    if (!password) { return res.status(400).send({ error: 'Missing password' }); }
+    if (password != confirm) {
+      error = { message: 'Password is not identical'};
+      return res.status(401).render('signup', { error });
+    }
 
-    const emailExists = await dbClient.users.findOne({ email });
+    const emailExists = await DB.User.findOne({ email });
 
-    if (emailExists) { return res.status(400).send({ error: 'Already exist' }); }
+    if (emailExists) { 
+      error = { message: 'Email already exists'};
+      return res.status(401).render('signup', { error });
+    }
 
     const sha1Password = sha1(password);
 
-    let result;
     try {
-      result = await dbClient.users.insertOne({
+      await DB.User.insertOne({
         email,
         password: sha1Password,
+        firstName,
+        lastName
       });
     } catch (err) {
-      return res.status(500).send({ error: 'Error creating user.' });
+      error = { message: '500 Internal server error'};
+      return res.status(401).render('signup', { error });
     }
 
-    const user = {
-      id: result.insertedId,
-      email,
-    };
-
-    return res.status(201).send(user);
+    return res.status(201).redirect('/login');
   }
 
   static async getMe(req, res) {

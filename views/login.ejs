@@ -28,11 +28,11 @@
                 <h3>Login to your account</h3>
                 <p>Don't have an account? <span><a href="#signup">create a new one</a></span></p>
             </div>
-            <form action="/submit-form" method="post">
+            <form action="" method="post">
                 <div class="credential">
                     <div class="email">
                         <input type="email" id="email" name="email">
-                        <label for="email">E-mail</label>
+                        <label for="email">Email</label>
                     </div>
                     <img src="../public/images/mail.svg">
                 </div>
@@ -45,7 +45,13 @@
                     <img id="eye" class="hide" src="../public/images/closedeye.svg">
                 </div>
 
-                <input type="submit" value="Create account" id="submit">
+                <% if (error.message) { %>
+                    <input type="submit" value="Login" id="submit" style="margin-top: 20px;">
+                    <p class="error"><%= error.message %></p>
+                <% } else { %>
+                    <input type="submit" value="Login" id="submit">
+                <% } %>
+                
             </form>
         </article>
     </section>

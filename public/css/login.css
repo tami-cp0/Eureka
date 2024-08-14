@@ -112,7 +112,7 @@ span {
 
 form {
     width: 70%;
-    height: 280px;
+    height: 320px;
     border-radius: 20px;
     margin: 0 auto;
     border: 2px solid var(--primary-color);
@@ -197,10 +197,10 @@ form div img {
 }
 
 form #submit {
-    width: 60%;
+    width: 50%;
     height: 50px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 45px;
     border-radius: 15px;
     background-color: var(--primary-color);
     border: none;
@@ -210,3 +210,8 @@ form #submit {
     cursor: pointer;
 }
 
+form .error {
+    color: red;
+    margin: 0 auto;
+    margin-top: 25px;
+}

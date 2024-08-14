@@ -1,20 +1,21 @@
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
-import userSchema from './models/user';
-import chapterSchema from './models/chapter';
-import quizSchema from './models/quiz';
-import courseSchema from './models/course';
-import startedCourseSchema from './models/startedCourse';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import userSchema from './models/user.js';
+import chapterSchema from './models/chapter.js';
+import quizSchema from './models/quiz.js';
+import courseSchema from './models/course.js';
+import startedCourseSchema from './models/startedCourse.js';
 
-config({ path: '../.env' }); // Load environment variables from .env file
+config({ path: `.env` }); // Load environment variables from .env file
 
-class DBClient {
+class MongoDBClient {
   /**
    * Initializes the DB class and attempts to connect to MongoDB.
    * @constructor
    */
   constructor() {
-    this.uri = process.env.DB_URI;
     this.alive = false;
 
     this.connect();
@@ -27,13 +28,13 @@ class DBClient {
    */
   async connect() {
     try {
-      await mongoose.connect(this.uri, {
+      await mongoose.connect(process.env.DB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         serverSelectionTimeoutMS: 5000,
       });
       this.alive = true;
-      console.log("Connected to MongoDB");
+      console.log('MongoDB is connected');
       this.createModels(); // Create models after successful connection
     } catch (err) {
       this.alive = false;
@@ -54,10 +55,5 @@ class DBClient {
   }
 }
 
-const DBClient = new DBClient();
-export default DBClient;
-
-// Check the connection status after a short delay
-setTimeout(() => {
-  console.log(db.alive);
-}, 4000);
+const DB = new MongoDBClient();
+export default DB;

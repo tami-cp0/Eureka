@@ -28,15 +28,15 @@
                 <h3>Create a <span>new</span> account.</h3>
                 <p>Already have an account? <span><a href="#login">Login</a></span></p>
             </div>
-            <form action="/submit-form" method="post">
+            <form action="" method="post">
                 <div class="name">
                     <div class="first_name">
-                        <input type="text" id="first_name" name="name">
+                        <input type="text" id="first_name" name="firstName">
                         <label for="first_name">First name</label>
                     </div>
                     
                     <div class="last_name">
-                        <input type="text" id="last_name" name="name">
+                        <input type="text" id="last_name" name="lastName">
                         <label for="last_name">Last name</label>
                     </div>
                 </div>
@@ -44,7 +44,11 @@
                 <div class="credential">
                     <div class="email">
                         <input type="email" id="email" name="email">
-                        <label for="email">E-mail</label>
+                        <% if (error.message) { %>
+                            <label for="email" style="color: red;"><%= error.message %></label>
+                        <% } else { %>
+                            <label for="email">Email</label>
+                        <% } %>
                     </div>
                     <img src="../public/images/mail.svg">
                 </div>
@@ -67,6 +71,7 @@
               
                 
                 <input type="submit" value="Create account" id="submit">
+
             </form>
         </article>
     </section>
