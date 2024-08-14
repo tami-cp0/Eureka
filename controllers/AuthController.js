@@ -62,6 +62,7 @@ class AuthController {
       return next();
     } else {
       // User is not logged in, redirect to the login page
+      req.flash('error', 'Email or Password is invalid');
       res.redirect('/login');
     }
   }

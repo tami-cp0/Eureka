@@ -6,6 +6,7 @@ import session from 'express-session';
 import router from './routes/index.js';
 import cache from './db/cache.js';
 import RedisStore from 'connect-redis';
+import flash from 'connect-flash';
 
 config();
 
@@ -25,6 +26,11 @@ app.use(session({
   cookie: { secure: false, maxAge: 86400 * 7 } // 1 day, set secure to true if using HTTPS
 }));
 
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.flash = req.flash();
+  next();
+});
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true }));
 

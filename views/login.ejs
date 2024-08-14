@@ -45,9 +45,9 @@
                     <img id="eye" class="hide" src="../public/images/closedeye.svg">
                 </div>
 
-                <% if (error.message) { %>
+                <% if (flash.error) { %>
                     <input type="submit" value="Login" id="submit" style="margin-top: 20px;">
-                    <p class="error"><%= error.message %></p>
+                    <p class="error"><%= flash.error %></p>
                 <% } else { %>
                     <input type="submit" value="Login" id="submit">
                 <% } %>

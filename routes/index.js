@@ -22,7 +22,7 @@ router.post('/login', AuthController.connect, (req, res) => {
 });
 
 
-router.use('/home', AuthController.loginRequired,(req, res) => {
+router.use('/home', AuthController.loginRequired, (req, res) => {
   res.render('home');
 });
 
