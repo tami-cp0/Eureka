@@ -4,6 +4,7 @@ import AuthController from "../controllers/AuthController.js";
 
 const router = Router()
 
+// routes directly related to pages
 // SignUp
 router.get('/signup', (req, res) => {
   const error = {};
@@ -44,5 +45,8 @@ router.use('/home', AuthController.loginRequired,(req, res) => {
 // router.use('/courses/drafts', (req, res) => {
 //   res.render('courses/drafts');
 // });
+
+
+// routes for information
 
 export default router;

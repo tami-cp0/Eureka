@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import userSchema from './models/user.js';
 import chapterSchema from './models/chapter.js';
 import quizSchema from './models/quiz.js';

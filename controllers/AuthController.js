@@ -22,7 +22,7 @@ class AuthController {
       }
 
       // create user session
-      req.session.userId = user._id.toString();
+      req.session.userId = user._id;
 
       return next();
     } catch (err) {
