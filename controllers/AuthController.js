@@ -17,8 +17,8 @@ class AuthController {
     try {
       const user = await DB.User.findOne({ email, password: sha1Password });
       if (!user) {
-        const error = { message: 'Email or Password is invalid' };
-        return res.status(401).render('login', { error });
+        req.flash('error', 'Email or Password is invalid');
+        return res.status(401).redirect('/login');
       }
 
       // create user session
@@ -27,8 +27,8 @@ class AuthController {
       return next();
     } catch (err) {
       console.log(err);
-      const error = { message: '500 Internal server error' };
-      return res.status(500).render('login', { error });
+      req.flash('error', '500 Internal server error');
+      return res.status(500).redirect('/login');
     }
   }
 
@@ -42,8 +42,8 @@ class AuthController {
     req.session.destroy(err => {
       if (err) {
         console.log(err);
-        const error = { message: 'Failed to log out' };
-        return res.status(500).render('login', { error });
+        req.flash('error', '500 Internal server error');
+        return res.status(500).redirect('/login');
       }
       res.redirect('/login'); // Redirect to login page or any other page
     });
@@ -62,7 +62,7 @@ class AuthController {
       return next();
     } else {
       // User is not logged in, redirect to the login page
-      req.flash('error', 'Email or Password is invalid');
+      req.flash('error', 'Login required');
       res.redirect('/login');
     }
   }

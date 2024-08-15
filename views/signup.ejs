@@ -26,7 +26,7 @@
             </nav>
             <div class="text">
                 <h3>Create a <span>new</span> account.</h3>
-                <p>Already have an account? <span><a href="#login">Login</a></span></p>
+                <p>Already have an account? <span><a href="/login">Login</a></span></p>
             </div>
             <form action="" method="post">
                 <div class="name">
@@ -44,8 +44,8 @@
                 <div class="credential">
                     <div class="email">
                         <input type="email" id="email" name="email">
-                        <% if (error.message) { %>
-                            <label for="email" style="color: red;"><%= error.message %></label>
+                        <% if (flash.error) { %>
+                            <label for="email"><%= flash.error %></label>
                         <% } else { %>
                             <label for="email">Email</label>
                         <% } %>

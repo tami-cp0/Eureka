@@ -209,3 +209,6 @@ form #submit {
     cursor: pointer;
 }
 
+form .error {
+    color: red;
+}

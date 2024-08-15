@@ -21,8 +21,11 @@ router.post('/login', AuthController.connect, (req, res) => {
   res.redirect('/home');
 });
 
+router.get('/', (req, res) => {
+  res.redirect('/home');
+})
 
-router.use('/home', AuthController.loginRequired, (req, res) => {
+router.get('/home', AuthController.loginRequired, (req, res) => {
   res.render('home');
 });
 

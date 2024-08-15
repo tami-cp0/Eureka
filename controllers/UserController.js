@@ -10,23 +10,22 @@ class UsersController {
    */
   static async postNewUser(req, res) {
     const { firstName, lastName, email, password, confirm } = req.body;
-    let error;
 
     if (!(email || password || firstName || lastName || confirm)) {
-      error = { message: 'Missing details'};
-      return res.status(400).render('signup', { error });
+      req.flash('error', 'Missing details');
+      return res.status(400).redirect('/signup');
     }
 
     if (password != confirm) {
-      error = { message: 'Password is not identical'};
-      return res.status(400).render('signup', { error });
+      req.flash('error', 'Password is not identical');
+      return res.status(400).redirect('/signup');
     }
 
     const emailExists = await DB.User.findOne({ email });
 
     if (emailExists) { 
-      error = { message: 'Email already exists'};
-      return res.status(400).render('signup', { error });
+      req.flash('error', 'Email already exists');
+      return res.status(400).redirect('/signup');
     }
 
     const sha1Password = sha1(password);
@@ -39,10 +38,11 @@ class UsersController {
         lastName
       });
     } catch (err) {
-      error = { message: '500 Internal server error'};
-      return res.status(500).render('signup', { error });
+      req.flash('error', '500 Internal server error');
+      return res.status(500).redirect('/signup');
     }
 
+    req.flash('error', 'Account Created. Login to Eureka now');
     return res.status(201).redirect('/login');
   }
 
