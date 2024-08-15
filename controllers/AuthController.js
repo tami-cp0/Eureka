@@ -42,10 +42,9 @@ class AuthController {
     req.session.destroy(err => {
       if (err) {
         console.log(err);
-        req.flash('error', '500 Internal server error');
-        return res.status(500).redirect('/login');
+      } else {
+        return res.redirect('/login'); // Redirect to login page or any other page
       }
-      res.redirect('/login'); // Redirect to login page or any other page
     });
   }
 
