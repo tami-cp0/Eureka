@@ -36,6 +36,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/public', express.static(__dirname + '/public'));
 
+
+app.use('/load', (req, res) => {
+  res.render('partials/preloader');
+})
 // Mount the main router
 app.use(router);
 
