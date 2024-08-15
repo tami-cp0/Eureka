@@ -3,7 +3,7 @@ import DB from '../db/db.js';
 
 class AuthController {
   /**
-   * Handles user authentication.
+   * Handles user authentication to login user.
    * Verifies the user's credentials and creates a session if valid.
    * @param {Object} req - Express request object containing email and password in the body.
    * @param {Object} res - Express response object used to render the login page on failure.

@@ -7,19 +7,19 @@ const router = Router()
 // routes directly related to pages
 // SignUp
 router.get('/signup', (req, res) => {
-  const error = {};
-  res.render('signup', { error });
+  res.render('signup');
 });
 router.post('/signup', UsersController.postNewUser);
 
 // Login
 router.get('/login', (req, res) => {
-  const error = {};
-  res.render('login', { error });
+  res.render('login');
 });
 router.post('/login', AuthController.connect, (req, res) => {
   res.redirect('/home');
 });
+
+router.get('/logout', AuthController.loginRequired, AuthController.disconnect);
 
 router.get('/', (req, res) => {
   res.redirect('/home');

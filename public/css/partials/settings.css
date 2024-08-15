@@ -17,7 +17,7 @@
     top: 0;
     right: 0;
     width: 300px; /* Width of the settings panel */
-    height: 899px; /* Full viewport height */
+    height: 100%; /* Full viewport height */
     background-color: var(--primary-color); /* Background color */
     color: #EDF2F7; /* Text color */
     padding: 20px;
@@ -27,6 +27,7 @@
     flex-direction: column;
     align-items: center;
     opacity: 1;
+    overflow: hidden;
 }
 
 .settings a {
