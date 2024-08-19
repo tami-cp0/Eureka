@@ -1,4 +1,4 @@
-@import 'normalize.css';
+@import './normalize.css';
 @import '../partials/cards.css';
 
 :root {

@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Oxygen:700&display=swap");
 
 :root {
-  --bg: #EDF2F7;
-  --c-01: #1A202C;
-  --c-02: #3d4964;
+  --primary: #EDF2F7;
+  --secondary: #1A202C;
+  --sub-secondary: #3d4964;
   --font-01: "Oxygen", sans-serif;
 }
 
@@ -15,7 +15,7 @@
   left: 0;
   z-index: 2000;
   overflow: hidden;
-  background-color: var(--bg);
+  background-color: var(--primary);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,7 +31,7 @@
   top: 0;
   padding: 0;
   margin: 0;
-  color: var(--c-01);
+  color: var(--secondary);
   font-family: var(--font-01);
   animation: text 3.5s ease both infinite;
   font-size: 12px;
@@ -66,15 +66,16 @@
 }
 
 .preloader .loading span {
-  background-color: var(--c-01);
+  background-color: var(--secondary);
   border-radius: 50px;
   display: block;
-  height: 16px;
-  width: 16px;
+  height: 16px !important;
+  width: 16px !important;
   bottom: 0;
   position: absolute;
   transform: translateX(64px);
   animation: loading 3.5s ease both infinite;
+  margin: 0 !important;
 }
 
 .preloader .loading span:before {
@@ -82,7 +83,7 @@
   content: "";
   width: 100%;
   height: 100%;
-  background-color: var(--c-02);
+  background-color: var(--sub-secondary);
   border-radius: inherit;
   animation: loading2 3.5s ease both infinite;
 }

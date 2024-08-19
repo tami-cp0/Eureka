@@ -4,14 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eureka</title>
-    <link rel="stylesheet" href="../public/css/home.css">
+    <link rel="stylesheet" href="../public/css/publish.css">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../public/scripts/publish.js" defer></script>
 </head>
 <body>
     <%- include('partials/preloader') %>
-    <div class="home-header">
+    <div class="publish-header">
         <%- include('partials/header') %>
     </div>
-    <%- include('partials/settings') %>
-    <%- include('partials/footer') %>
+    <section class="publish-section">
+        <section class="left">
+            <div class="course-sections">
+                <div class="chapter" data-chapter="1">
+                    <div></div>
+                    <p>Chapter 1</p>
+                </div>
+            </div>
+            <div class="section-option">
+                <p class="add">+ Add section</p>
+                <p class="option hide select-chapter">Chapter</p>
+                <p class="option hide select-quiz">Quiz</p>
+            </div>
+        </section>
+        <section class="right">
+            <article id="page-container">
+                <div class="page chapter" data-chapter="1">
+                    <div id="editor-1" class="quill-editor"></div>
+                </div>
+            </article>
+            <div class="info-section">
+                <article>
+                    <form class="course-details" action="" method="post">
+                        <div class="info">
+                            <div class="title">
+                                <input type="text" name="title" id="title">
+                                <label for="title">Course Title</label>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <div class="duration">
+                                <input type="text" name="duration" id="duration">
+                                <label for="duration">Course Duration</label>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <div class="niche">
+                                <input type="text" id="niche" name="niche">
+                                <label for="niche">Course Niche</label>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <div class="overview">
+                                <textarea id="overview" name="overview" rows="4" cols="50"  maxlength="500"></textarea>
+                                <label for="overview">Overview</label>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <div class="image">
+                                <img src="../public/images/add-image.svg">
+                                <input type="file" id="image" accept="image/*">
+                                <span id="file-name">Add course image</span>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="hide">
+                        <img src="../public/images/arror.svg" alt="">
+                    </div>
+                </article>
+                <div class="buttons">
+                    <button>Save to drafts</button>
+                    <button>Publish</button>
+                </div>
+            </div>
+        </section>
+    </section>
+    <!-- <%- include('partials/settings') %> -->
 </body>
 </html>

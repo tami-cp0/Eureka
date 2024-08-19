@@ -34,6 +34,7 @@ body > section {
 
 h1 {
     font-weight: 400;
+    font-size: 28px;
 }
 
 .publishMsg p {
@@ -71,7 +72,5 @@ h1 {
 }
 
 .get-started {
-    margin-top: 80px;
-    margin-bottom: 70px;
-    height: auto;
+    margin-top: 100px;
 }

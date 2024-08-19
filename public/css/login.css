@@ -121,24 +121,6 @@ form {
     flex-direction: column;
 }
 
-form div.name {
-    margin: 0px 30px;
-    margin-top: 20px;
-    height: 70px;
-    display: flex;
-    width: auto;
-    justify-content: space-between;
-    background-color: var(--secondary-color);
-}
-
-form .first_name, .last_name {
-    background-color: var(--sub-background);
-    width: 47%;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column-reverse;
-}
-
 form input{
     border: none;
     text-decoration: none;

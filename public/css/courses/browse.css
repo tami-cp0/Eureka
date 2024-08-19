@@ -10,3 +10,13 @@
     --sub: #91B3FA;
     --body: #f5f5f5;
 }
+
+body {
+    height: auto;
+    background-color: var(--body);
+}
+
+body > section {
+    width: 90%;
+    margin: 0 auto;
+}

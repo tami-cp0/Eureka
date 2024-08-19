@@ -1,4 +1,4 @@
-@import 'normalize.css';
+@import './normalize.css';
 
 :root {
     --primary-color: #EDF2F7;
@@ -8,4 +8,422 @@
     --subtext-color: #6A6E72;
     --sub: #91B3FA;
     --body: #f5f5f5;
+    --quiz-textarea: #dae0e7;
+}
+
+
+body {
+    background-color: var(--body);
+    font-family: 'Inter';
+}
+
+body > section {
+    height: 92%;
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.publish-section {
+    width: 100%;
+    display: flex;
+}
+
+.left {
+    width: 20%;
+    background-color: var(--secondary-color);
+    overflow: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none; 
+}
+.left::-webkit-scrollbar {
+    display: none; /* Hides scrollbar for WebKit-based browsers */
+}
+
+
+.left .chapter {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.left .chapter div {
+    width: 15px;
+    height: 65%;
+    background-color: var(--secondary-color);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.left .chapter p {
+    color: var(--primary-color);
+    margin: 0 auto;
+    font-size: 16px;
+    border-bottom: 1px solid var(--primary-color);
+    padding: 15px;
+    cursor: pointer;
+}
+
+.current {
+    background-color: var(--primary-color) !important;
+}
+
+.publish-section .left .section-option > p {
+    color: var(--sub);
+    font-size: 16px;
+    text-align: center;
+    margin: 0;
+    cursor: pointer;
+}
+
+.section-option { 
+    margin-bottom: 20px;
+}
+
+.add {
+    margin-top: 10px !important;
+    margin-bottom: 15px !important;
+}
+
+.option {
+    padding: 15px 0;
+    width: 40%;
+    margin: 0 auto !important;
+    background-color: var(--primary-color);
+    color: var(--secondary-color) !important;
+    border: 1px solid var(--secondary-color);
+    font-weight: 600 !important;
+    opacity: 0;
+}
+
+.publish-section .right {
+    flex: 4;
+    display: flex;
+    overflow-y: scroll;
+    justify-content: center;
+}
+
+/* Scrollbar */
+/* Custom scrollbar styling */
+/* Overall scrollbar width */
+*::-webkit-scrollbar {
+    width: 10px; /* This controls the width of the scrollbar track */
+}
+
+/* Scrollbar thumb appearance */
+*::-webkit-scrollbar-thumb {
+    background-color: var(--sub-background); /* Scrollbar thumb color */
+    border-radius: 13px;
+}
+
+/* Scrollbar track appearance */
+*::-webkit-scrollbar-track {
+    background-color: var(--primary-color); /* Scrollbar track color */
+    border-radius: 13px;
+    padding: 5px;
+}
+
+
+#page-container {
+    width: 100%;
+}
+
+.page {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    position: sticky;
+    width: 75%;
+}
+
+.page.active {
+    display: flex; /* Only the active page is shown */
+}
+  
+.quill-editor {
+    height: auto !important;
+    font-size: 20px !important;
+    border-left: 3px solid var(--secondary-color) !important;
+    border-right: 3px solid var(--secondary-color) !important;
+    border-bottom: none !important;
+    height: 100% !important;
+    width: 90% !important;
+}
+
+.ql-toolbar {
+    z-index: 15000 !important;
+    width: fit-content;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    position: sticky;
+    top: 0;
+    background-color: var(--secondary-color);
+    height: 70px !important;
+    border: none !important;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center !important;
+}
+
+.ql-stroke {
+    stroke: var(--primary-color) !important;
+}
+
+.ql-fill {
+    fill: var(--primary-color) !important;
+}
+
+button:hover, button:focus, button.ql-active,
+  .ql-picker-label:hover, .ql-picker-label.ql-active,
+  .ql-picker-item:hover, .ql-picker-item.ql-selected {
+    color: var(--sub) !important;
+    .ql-fill, .ql-stroke.ql-fill {
+      fill: var(--sub) !important;
+    }
+    .ql-stroke, .ql-stroke-miter {
+      stroke: var(--sub) !important;
+    }
+}
+
+.ql-toolbar button, span {
+    height: fit-content !important;
+    width: fit-content !important;
+    margin: 0 !important;
+    margin-right: 5px !important;
+}
+
+.ql-toolbar svg {
+    height: 30px !important;
+}
+
+.ql-picker-label {
+    width: 85px !important;
+    color: var(--primary-color) !important;
+    display: flex !important;
+    align-items: center !important;
+
+}
+
+.ql-picker-label svg {
+    margin-top: -13px !important;
+    padding: 0 !important;
+}
+
+
+.right .info-section {
+    flex: 1;
+    position: fixed;
+    right: 20px;
+    width: 20%;
+}
+
+
+.info-section article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+    height: 650px;
+    overflow: hidden;
+}
+
+ .course-details {
+    width: 100%;
+    height: 600px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    position: relative;
+    transition: all .6s ease-out;
+}
+
+.course-details img {
+    width: 20px;
+    height: auto;
+    cursor: pointer;
+}
+
+.course-details input, textarea{
+    border: none;
+    text-decoration: none;
+    width: 90%;
+    height: 30px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    outline: none;
+    color: var(--primary-color);
+    background-color: var(--sub-background);
+}
+
+.course-details label {
+    color: var(--subtext-color);
+    margin-left: 15px;
+    font-size: 16px;
+    width: 90%;
+}
+
+
+.course-details div div input:focus + label {
+    color: var(--primary-color);
+}
+
+.course-details div div textarea:focus + label {
+    color: var(--primary-color);
+}
+
+.course-details .info {
+    margin: 0px 30px;
+    margin-top: 20px;
+    height: 70px;
+    background-color: var(--sub-background);
+    border-radius: 15px;
+    display: flex;
+}
+
+.title, .duration, .niche, .overview {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.overview input {
+    height: 150px;
+}
+
+.info:nth-child(4) {
+    height: 200px;
+}
+
+.overview label {
+    margin-bottom: 10px;
+}
+textarea#overview {
+    height: 145px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+textarea#overview::-webkit-scrollbar {
+    display: none;
+}
+
+.image {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.image > img {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.image input {
+    position:absolute;
+    width: 300px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#file-name {
+    color: var(--primary-color);
+}
+
+
+.info-section article > div {
+    width: 60%;
+    height: 30px;
+    border-radius: 10px;
+    margin-top: 15px;
+    background-color: var(--secondary-color);
+    cursor: pointer;
+    position: relative;
+    bottom: 0;
+    transition: all .6s ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-section .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 15%;
+}
+
+.buttons > button {
+    width: 50%;
+    height: 40px;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* for quiz page */
+.page.quiz {
+    padding: 40px 80px;
+}
+
+.questions {
+    height: fit-content;
+    border: 4px solid black;
+}
+
+.question {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px !important;
+}
+
+.question > label {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+.questions p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--secondary-color);
+    border: 3px solid green;
+
+}
+
+.question #question-1 {
+    width: 100%;
+    font-size: 18px;
+    resize: none;
+    min-height: 100PX;
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--primary-color);
+}
+
+.question .options {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.question .options label > input[type="text"]{
+    background-color: var(--primary-color);
+    min-width: 50%;
+    
+    border: 1px solid var(--secondary-color);
 }

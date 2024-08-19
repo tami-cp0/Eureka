@@ -10,7 +10,7 @@
 }
 
 .header {
-    height: 90px;
+    height: 8%;
     background-color: var(--primary-color);
     color: var(--secondary-color);
     width: 100%;
@@ -33,12 +33,14 @@
     font-size: 30px;
     font-family: 'Playfair Display';
     font-weight: bold;
+
 }
 
 .header article > div {
     width: auto;
     display: flex;
     align-items: center;
+
 }
 
 .searchBar input {
@@ -60,15 +62,16 @@
     cursor: pointer;
 }
 
-.header p {
+.header a {
     margin-left: 30px;
     width: 60px;
     font-size: 14px;
     cursor: pointer;
     font-family: 'Inter';
+    color: var(--secondary-color);
 }
 
-.header p:hover {
+.header a:hover {
     font-weight: bold;
 }
 
