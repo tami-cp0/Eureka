@@ -1,6 +1,7 @@
 import { Router } from "express";
 import UsersController from "../controllers/UserController.js";
 import AuthController from "../controllers/AuthController.js";
+import CoursesController from "../controllers/CourseController.js";
 
 const router = Router()
 
@@ -19,6 +20,8 @@ router.post('/login', AuthController.connect, (req, res) => {
 });
 
 router.get('/logout', AuthController.disconnect);
+
+router.delete('/deleteUser', AuthController.loginRequired, UsersController.deleteMe);
 
 router.get('/', (req, res) => {
   res.redirect('/publish');
@@ -52,5 +55,6 @@ router.use('/courses/drafts', (req, res) => {
 
 
 // routes for information
+router.get('course/:id', CoursesController.getCourse);
 
 export default router;

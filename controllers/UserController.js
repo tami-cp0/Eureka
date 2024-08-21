@@ -75,6 +75,19 @@ class UsersController {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
+
+  static async deleteMe(req, res) {
+    try {
+      const { userId } = req.session;
+      await DB.User.deleteOne({ _id: userId });
+      
+      return res.redirect('/signup');
+    } catch (err) {
+      console.error(err);
+      req.flash('error', 'Signup required');
+      return res.redirect('/signup');
+    }
+  }
 }
 
 export default UsersController;
