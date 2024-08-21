@@ -7,6 +7,7 @@ import router from './routes/index.js';
 import cache from './db/cache.js';
 import RedisStore from 'connect-redis';
 import flash from 'connect-flash';
+import DB from './db/db.js';
 
 config();
 
@@ -27,10 +28,29 @@ app.use(session({
 }));
 
 app.use(flash());
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
+  // ensure the user details is available to all views
+  if (req.session.userId) {
+    try {
+      const user = await DB.User.findById(req.session.userId).populate({
+        path: 'recents',
+        select: '-password -pfp -email'
+      });
+
+      if (user) {
+        res.locals.user = user;
+      }
+    } catch (err) {
+      console.error('Failed to retrieve user:', err);
+    }
+  }
+
+  // Set flash messages globally
   res.locals.flash = req.flash();
+  
   next();
 });
+
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true }));
 
