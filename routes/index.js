@@ -54,7 +54,16 @@ router.use('/courses/drafts', (req, res) => {
 });
 
 
-// routes for information
-router.get('course/:id', CoursesController.getCourse);
+// routes related to information
+router.get('/user', UsersController.getMe);
+
+router.post('/publish', CoursesController.postCourse);
+router.put('/publish', CoursesController.putCourse);
+
+router.get('course/:id/view', CoursesController.viewCourse);
+
+router.get('courses/:id', CoursesController.getCourse);
+router.get('/courses', CoursesController.getAllCourses);
+
 
 export default router;
