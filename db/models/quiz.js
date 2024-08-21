@@ -6,7 +6,7 @@ const quizSchema = new mongoose.Schema({
     options: [String], // Array of 4 options
     correctOption: Number // Index of the correct option
   }],
-  courseId: mongoose.Schema.Types.ObjectId,
+  courseId: { type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: true },
 });
 
 export default quizSchema;

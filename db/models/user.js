@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  pfp: { type: String, default: '' },
-  recents: [{ type: mongoose.Schema.Types.ObjectId }]
+  pfp: { type: Buffer, default: Buffer.from([]) },
+  recents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course', default: [] }]
 });
 
 export default userSchema;
