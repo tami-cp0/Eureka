@@ -76,6 +76,12 @@ class UsersController {
     }
   }
 
+  /**
+   * Deletes a user based on their session ID and redirects to the signup page.
+   * @param {Object} req - The request object, containing session information.
+   * @param {Object} res - The response object, used to redirect and send flash messages.
+   * @returns {Object} Redirects to the signup page or displays an error message.
+   */
   static async deleteMe(req, res) {
     try {
       const { userId } = req.session;
