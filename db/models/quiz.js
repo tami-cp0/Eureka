@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const quizSchema = new mongoose.Schema({
+  type: { type: String, default: 'Quiz' },
   questions: [{
     text: String,
     options: [String], // Array of 4 options
