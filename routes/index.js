@@ -59,7 +59,7 @@ router.get('/user', UsersController.getMe);
 
 router.post('/publish', CoursesController.postCourse);
 
-router.put('/publish', CoursesController.putCourse);
+router.put('/publish/:id', CoursesController.putCourse);
 
 router.get('course/:id/view', CoursesController.viewCourse);
 
