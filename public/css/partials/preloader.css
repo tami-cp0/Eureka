@@ -14,8 +14,8 @@
   top: 0;
   left: 0;
   z-index: 2000;
-  overflow: hidden;
   background-color: var(--primary);
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,12 +65,15 @@
   }
 }
 
-.preloader .loading span {
+/* remove colour loader */
+
+/* 
+div.preloader div.loading > span {
   background-color: var(--secondary);
   border-radius: 50px;
   display: block;
-  height: 16px !important;
-  width: 16px !important;
+  height: 16px;
+  width: 16px;
   bottom: 0;
   position: absolute;
   transform: translateX(64px);
@@ -78,7 +81,7 @@
   margin: 0 !important;
 }
 
-.preloader .loading span:before {
+div.preloader div.loading > span:before {
   position: absolute;
   content: "";
   width: 100%;
@@ -140,4 +143,4 @@
     transform: translateX(0px);
     width: 16px;
   }
-}
+} */
