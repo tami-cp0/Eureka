@@ -5,13 +5,13 @@ class CoursesController {
   static async postCourse(req, res) {
     // {course: {schema json form}, sections: [quiz or chapter, in their schema json form]}
     const {
-      title, duration, overview, viewCount, thumbnail,
-      numberOfCompletions, niche, chapters,
-      quizzes, totalChapters, totalQuizzes
+      title, duration, overview, thumbnail,
+      niche, totalChapters, totalQuizzes
     } = req.body.course;
 
     let courseId;
 
+    // check whether it was saved as draft or not
     const isDraft = req.query.draft === 'true';
 
     try {
@@ -20,47 +20,49 @@ class CoursesController {
       const user = await DB.User.findById(userId);
       if (!user) {
         req.flash('error', 'User does not exist');
-        return res.status(400).redirect('/signup');
+        return res.status(400).json({ redirect: '/signup' });
       }
 
       const author = `${user.firstName} ${user.lastName}`;
       const createdCourse = await DB.Course.create({
-        title, duration, overview, viewCount, thumbnail,
-        author, numberOfCompletions, userId, isDraft,
-        niche, chapters, quizzes, totalQuizzes, totalChapters
+        title, duration, overview, thumbnail,
+        author, userId, isDraft,
+        niche, totalQuizzes, totalChapters
       });
 
       courseId = createdCourse._id;
-      let chapterCount = 0;
+
+      // Will contain ids of chapters or quizzes in order
+      const sectionIds = [];
 
       for (const section of req.body.sections) {
-        chapterCount++;
-        if ('content' in section) {
-          if (!section.content) { throw new Error(`Chapter ${chapterCount} is empty.`); }
-
-          await DB.Chapter.create({ content: section.content, courseId });
+        if (section.type === 'Chapter') {
+          const newChapter = await DB.Chapter.create({ content: section.content, courseId });
+          sectionIds.push({ id: newChapter._id, type: 'Chapter'});
         }
         // else if ('questions' in section.questions && questions) {}
         // Quiz will be implemented later
       }
+
+      createdCourse.sections = sectionIds;
+      await createdCourse.save();
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: err.message });
     }
 
-    if (isDraft) {
-      return res.status(201).redirect('/courses/drafts');
-    } else {
-      return res.status(201).redirect(`/courses/${courseId}/view`);
+    if(isDraft === true) {
+      return res.status(201).json({ courseId });
     }
+  
+    return res.status(201).json({ redirect: `/courses/${courseId}/view`, courseId });
   }
 
   static async putCourse(req, res) {
     // {course: {schema json form}, sections: [quiz or chapter, in their schema json form], uploaded: false }
     const {
-      title, duration, overview, viewCount, thumbnail,
-      numberOfCompletions, niche, chapters,
-      quizzes, totalChapters, totalQuizzes
+      title, duration, overview, thumbnail,
+      niche, totalChapters, totalQuizzes
     } = req.body.course;
 
     let courseId;
@@ -74,34 +76,32 @@ class CoursesController {
       const user = await DB.User.findById(userId);
       if (!user) {
         req.flash('error', 'User does not exist');
-        return res.status(400).redirect('/signup');
+        return res.status(400).json({ redirect: '/signup' });
       }
 
       const author = `${user.firstName} ${user.lastName}`;
-
-      const createdCourse = await DB.Course.findByIdAndUpdate(
+      const updatedCourse = await DB.Course.findByIdAndUpdate(
         courseId,
         {
           $set: {
-            title, duration, overview, viewCount, thumbnail,
-            author, numberOfCompletions, userId, isDraft,
-            niche, chapters, quizzes, totalQuizzes, totalChapters
+            title, duration, overview, thumbnail,
+            author, userId, isDraft,
+            niche, totalQuizzes, totalChapters
           }
         },
         { new: true }
       );
 
-      let chapterCount = 0;
+      // Will contain ids of chapters or quizzes in order
+      const sectionIds = [];
+
+      // instead of updating, i will just remove and recreate. TEMPORARY
+      await DB.Chapter.deleteMany({ courseId });
 
       for (const section of req.body.sections) {
-        chapterCount++;
-        if ('content' in section) {
-          if (!section.content) { throw new Error(`Chapter ${chapterCount} is empty.`); }
-
-          await DB.Chapter.findByIdAndUpdate(
-            new ObjectId(section.id),
-            { content: section.content }
-          );
+        if (section.type === 'Chapter') {
+          const newChapter = await DB.Chapter.create({ content: section.content, courseId });
+          sectionIds.push({ id: newChapter._id, type: 'Chapter'});
         }
         // else if ('questions' in section.questions && questions) {}
         // Quiz will be implemented later
@@ -111,11 +111,11 @@ class CoursesController {
       return res.status(500).json({ error: err.message });
     }
 
-    if (isDraft) {
-      return res.status(201).redirect('/courses/drafts');
-    } else {
-      return res.status(201).redirect(`/courses/${courseId}/view`);
+    if(isDraft === true) {
+      return res.status(201).json({ courseId });
     }
+  
+    return res.status(201).json({ redirect: `/courses/${courseId}/view`, courseId });
   }
 
 
@@ -126,8 +126,8 @@ class CoursesController {
       const courseId = req.params.courseId;
       const user = await DB.User.findById(userId);
       if (!user) {
-        req.flash('error', 'Signup required');
-        return res.redirect('/signup');
+        req.flash('error', 'User does not exist');
+        return res.status(400).json({ redirect: '/signup' });
       }
 
       const course = await DB.Course.findByIdAndUpdate(
@@ -140,7 +140,8 @@ class CoursesController {
         return res.status(404).json({ error: 'Course not found' });
       }
 
-      return res.status(200).render('courses/view', { user, course });
+
+      return res.status(200).render('courses/view', { course });
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: 'Internal Server Error' });
@@ -156,7 +157,7 @@ class CoursesController {
       const user = await DB.User.findById(userId);
       if (!user) {
         req.flash('error', 'Signup required');
-        return res.redirect('/signup');
+        return res.status(400).json({ redirect: '/signup' });
       }
 
       const course = await DB.Course.findByIdAndUpdate(
@@ -182,7 +183,7 @@ class CoursesController {
       const user = await DB.User.findById(userId);
       if (!user) {
         req.flash('error', 'Signup required');
-        return res.redirect('/signup');
+        return res.status(400).json({ redirect: '/signup' });
       }
 
       let courses = await DB.Course.find({

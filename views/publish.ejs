@@ -8,7 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="../public/scripts/publish.js" defer></script>
+    <script src="../public/scripts/publish/chapter.js" defer></script>
+    <script src="../public/scripts/publish/extra.js" defer></script>
+    <script src="../public/scripts/publish/upload.js" defer></script>
 </head>
 <body>
     <%- include('partials/preloader') %>
@@ -16,6 +18,19 @@
         <%- include('partials/header') %>
     </div>
     <section class="publish-section">
+        <div class="status loading">
+            <div class="lds-dual-ring"></div>
+            <p></p>
+        </div>
+        <div class="status failed">
+            <img src="../public/images/fail.svg">
+            <p></p>
+        </div>
+        <div class="status success">
+            <img src="../public/images/success.svg">
+            <p></p>
+        </div>
+
         <section class="left">
             <div class="course-sections">
                 <div class="chapter" data-chapter="1">

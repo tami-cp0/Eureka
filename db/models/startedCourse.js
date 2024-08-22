@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
 
 const startedCourseSchema = new mongoose.Schema({
+  type: { type: String, default: 'startedCourse' },
   startedAt: { type: Date, default: Date.now },
   courseId: { type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: true },
-  completedChapters: { type: Number, default: 0 },
-  totalChapters: { type: Number, required: true },
+  completedSections: [{ type: Number, default: 0 }],
+  totalChapters: { type: Number, default: 0 },
   completedQuizzes: { type: Number, default: 0 },
-  totalQuizzes: { type: Number, required: true },
+  totalQuizzes: { type: Number, default: 0 },
   completionPercentage: {
     type: Number,
     default: function() {
