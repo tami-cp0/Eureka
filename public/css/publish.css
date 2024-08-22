@@ -427,3 +427,66 @@ textarea#overview::-webkit-scrollbar {
     
     border: 1px solid var(--secondary-color);
 }
+
+
+/* upload status indicator */
+
+.status {
+    width: fit-content;
+    font-size: 16px;
+    color: var(--secondary-color);
+    font-weight: 600;
+    padding: 0px 20px;
+    height: 70px;
+    background-color: var(--primary-color);
+    position: absolute;
+    left: 50%;
+    top: -70px;
+    transform: translateX(-50%);
+    z-index: 999;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px;
+    transition: all 1s ease-in-out;
+}
+
+.status > img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.lds-dual-ring,
+.lds-dual-ring:after {
+  box-sizing: border-box;
+}
+.lds-dual-ring {
+  display: inline-block;
+  width: 55px;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 6.4px solid currentColor;
+  border-color: currentColor transparent currentColor transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
