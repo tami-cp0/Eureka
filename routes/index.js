@@ -33,7 +33,7 @@ router.get('/home', (req, res) => {
   res.render('home');
 });
 
-router.use('/publish', (req, res) => {
+router.get('/publish', (req, res) => {
   res.render('publish');
 });
 
@@ -58,6 +58,7 @@ router.use('/courses/drafts', (req, res) => {
 router.get('/user', UsersController.getMe);
 
 router.post('/publish', CoursesController.postCourse);
+
 router.put('/publish', CoursesController.putCourse);
 
 router.get('course/:id/view', CoursesController.viewCourse);
