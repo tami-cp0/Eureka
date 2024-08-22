@@ -15,7 +15,10 @@ class AuthController {
     const sha1Password = sha1(password);
 
     try {
-      const user = await DB.User.findOne({ email, password: sha1Password });
+      const user = await DB.User.findOne({ email, password: sha1Password }).populate({
+        path: 'recents',
+        select: '-password -pfp -email'
+      });
       if (!user) {
         req.flash('error', 'Email or Password is invalid');
         return res.status(401).redirect('/login');
@@ -23,6 +26,9 @@ class AuthController {
 
       // create user session
       req.session.userId = user._id;
+
+
+      // AFTER EVERYTHING TRY SETTING USER IN GLOBAL LOCALS
 
       return next();
     } catch (err) {
