@@ -67,6 +67,15 @@ body > section {
     cursor: pointer;
 }
 
+.left .chapter img {
+    position: relative;
+    left: -15%;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    z-index: 100;
+}
+
 .current {
     background-color: var(--primary-color) !important;
 }
