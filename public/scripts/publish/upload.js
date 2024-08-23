@@ -3,75 +3,55 @@ $(() => {
   //
   //
 
-  // this is to convert the course image to binary
-  function imageToBinary(imageFile) {
+  function imageToBase64(imageFile) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       
       reader.onload = function(event) {
-        // Convert ArrayBuffer to Uint8Array
-        const arrayBuffer = event.target.result;
-        const imageBuffer = new Uint8Array(arrayBuffer);
-        resolve(imageBuffer);
+        const base64String = event.target.result.split(',')[1]; // Extract only the base64 part
+        resolve(base64String);
       };
       
       reader.onerror = function(event) {
         reject(new Error("File could not be read: " + event.target.error));
       };
       
-      // Read the file as an ArrayBuffer
-      reader.readAsArrayBuffer(imageFile);
+      reader.readAsDataURL(imageFile); // This will encode the image as base64
     });
   }
-
-
+  
+  // Inside your collectInfo function
   async function collectInfo() {
-    // {course: {schema json form}, sections: [quiz or chapter, in their schema json form]}
-
     const title = $('#title').val().trim();
     const duration = $('#duration').val().trim();
     const niche = $('#niche').val().trim();
     const overview = $('#overview').val().trim();
-
-    // courseSchema already has default values
-    let course = { title, duration, niche, overview };
-
-    let complete = true;
-    for (const value of Object.values(course)) {
-      if (!value) {
-        complete = false;
-        break;
-      }
-    }
-
-    // for image
+  
     const fileInput = $('#image')[0];
     const imageFile = fileInput.files[0];
     let thumbnail;
     if (imageFile) {
-      thumbnail = await imageToBinary(imageFile);
+      thumbnail = await imageToBase64(imageFile);
     }
-    if (thumbnail) {
-      course = { title, duration, niche, overview, thumbnail };
-    }
-
+  
+    const course = { title, duration, niche, overview, thumbnail };
+  
     const sections = [];
     let totalChapters = 0;
     for (const number of Object.keys(quillEditors)) {
       if (quillEditors[number].getText().trim() === '') {
         throw new Error(`Chapter ${number} is empty`);
       }
-
+  
       totalChapters++;
-      sections.push({content: quillEditors[number].root.innerHTML, type: 'Chapter'});
+      sections.push({ content: quillEditors[number].root.innerHTML, type: 'Chapter' });
     }
-
+  
     course['totalChapters'] = totalChapters;
-
     
-    return { course, sections, complete };
+    return { course, sections, complete: !!(title && duration && niche && overview) };
   }
-
+  
   const courseId = $('body').attr('id');
   let requestMethod;
   let requestURL;
@@ -86,6 +66,7 @@ $(() => {
   }
 
   $('.draftUpload').on('click', async () => {
+    $('.status').css('display', 'none');
     $('.status.loading').css({
       top: '20px',
       display: 'flex',
@@ -94,6 +75,7 @@ $(() => {
     
     try {
       const collectedData = await collectInfo();
+      console.log(collectedData);
 
       $.ajax({
         url: `${requestURL}?draft=true`,
@@ -119,7 +101,7 @@ $(() => {
               top: '-70px',
               display: 'none'
             });
-          }, 3000);
+          }, 5000);
 
           $('body').attr('id', response.courseId);
         },
@@ -140,16 +122,29 @@ $(() => {
               top: '-70px',
               display: 'none'
             });
-          }, 3000);
+          }, 5000);
           console.log('Error:', error);
         }
       });
     } catch (error) {
+      $('.status.failed').css({
+        top: '20px',
+        display: 'flex'
+      });
+      $('.status.failed p').text(error.message);
+      setTimeout(() => {
+        $('.status.failed').fadeOut();
+        $('.status').css({
+          top: '-70px',
+          display: 'none'
+        });
+      }, 5000);
       console.error('Collect info error:', error);
     }
   });
 
   $('.publishUpload').on('click', async () => {
+    $('.status').css('display', 'none');
     $('.status.loading').css({
       top: '20px',
       display: 'flex',
@@ -209,7 +204,7 @@ $(() => {
               top: '-70px',
               display: 'none'
             });
-          }, 3000);
+          }, 5000);
 
           $('body').attr('id', response.courseId);
         },
@@ -230,11 +225,23 @@ $(() => {
               top: '-70px',
               display: 'none'
             });
-          }, 3000);
+          }, 5000);
           console.log('Error:', error);
         }
       });
     } catch (error) {
+      $('.status.failed').css({
+        top: '20px',
+        display: 'flex'
+      });
+      $('.status.failed p').text(error.message);
+      setTimeout(() => {
+        $('.status.failed').fadeOut();
+        $('.status').css({
+          top: '-70px',
+          display: 'none'
+        });
+      }, 5000);
       console.error('Collect info error:', error);
     }
   });
