@@ -6,7 +6,7 @@ const courseSchema = new mongoose.Schema({
   duration: { type: String, default: '' },
   overview: { type: String, default: '' },
   viewCount: { type: Number, default: 0 },
-  thumbnail: { type: Buffer },
+  thumbnail: { type: String },
   author: { type: String, default: '' },
   numberOfCompletions: { type: Number, default: 0 },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
