@@ -25,9 +25,9 @@ app.set('view engine', 'ejs');
 
 // Session setup
 app.use(session({
-  store: new RedisStore({ client: cache.getClient(), ttl: 86400 }),
+  store: new RedisStore({ client: cache.getClient(), ttl: 86400 * 7 }),
   secret: process.env.SECRET_KEY,
-  resave: true,
+  resave: false,
   saveUninitialized: false,
   cookie: { secure: false, maxAge: 86400 * 7 } // 1 week
 }));
