@@ -4,7 +4,6 @@ import userSchema from './models/user.js';
 import chapterSchema from './models/chapter.js';
 import quizSchema from './models/quiz.js';
 import courseSchema from './models/course.js';
-import imageSchema from './models/image.js';
 import startedCourseSchema from './models/startedCourse.js';
 
 config({ path: `.env` }); // Load environment variables from .env file
@@ -50,7 +49,6 @@ class MongoDBClient {
     this.Chapter = mongoose.model('Chapter', chapterSchema);
     this.Quiz = mongoose.model('Quiz', quizSchema);
     this.Course = mongoose.model('Course', courseSchema);
-    this.Image = mongoose.model('Image', imageSchema);
     this.StartedCourse = mongoose.model('StartedCourse', startedCourseSchema);
   }
 }
