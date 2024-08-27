@@ -2,13 +2,12 @@ $(() => {
   // save and upload all information to storage
   //
   //
-
   function imageToBase64(imageFile) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       
       reader.onload = function(event) {
-        const base64String = event.target.result.split(',')[1]; // Extract only the base64 part
+        const base64String = event.target.result.split(',')[1]; // Extract the base64 part
         resolve(base64String);
       };
       
@@ -18,7 +17,7 @@ $(() => {
       
       reader.readAsDataURL(imageFile); // This will encode the image as base64
     });
-  }
+  }  
   
   // Inside your collectInfo function
   async function collectInfo() {
@@ -31,7 +30,7 @@ $(() => {
     const imageFile = fileInput.files[0];
     let thumbnail;
     if (imageFile) {
-      thumbnail = await imageToBase64(imageFile);
+      thumbnail = { data: await imageToBase64(imageFile), type: imageFile.type};
     }
   
     const course = { title, duration, niche, overview, thumbnail };
@@ -165,7 +164,6 @@ $(() => {
         $('.status.failed p').text('All course information is required before publishing');
 
         $('.info').css('box-shadow', 'inset 0 0 0 2px red');
-        $('.info:last-child').css('box-shadow', 'none');
 
         setTimeout(() => {
           $('.status.failed').fadeOut();
@@ -181,7 +179,7 @@ $(() => {
       }
 
       $.ajax({
-        url: `${requestURL}draft=false`,
+        url: `${requestURL}?draft=false`,
         method: requestMethod,
         contentType: 'application/json',
         data: JSON.stringify(collectedData),
@@ -207,6 +205,10 @@ $(() => {
           }, 5000);
 
           $('body').attr('id', response.courseId);
+
+          if (response.redirect) {
+            window.location.href = response.redirect;
+          }
         },
         error: function(xhr, status, error) {
           $('.status.loading').css({
