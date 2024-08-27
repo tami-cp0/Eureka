@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eureka</title>
     <link rel="stylesheet" href="../../public/css/courses/published.css">
+    <script src="../../public/scripts/courses/published.js" defer></script>
 </head>
 <body>
     <%- include('../partials/preloader') %>
@@ -16,80 +17,30 @@
         <%- include('../partials/courses-nav') %>
     </article>
     <section class="courses-view">
-        <div class="cards">
-            <div class="card">
-                <img src="../public/images/htmltut.jpg" class="courseImage">
-                <p class="niche">Tech</p>
-                <div class="heading">
-                    <h5 class="title">HTML for beginners</h5>
-                    <img src="../public/images/dot.svg">
-                    <p class="courseDuration">2 months</p>
-                </div>
-                <h6 class="author">Tamilore</h6>
-                <div class="overlay">
-                    <div>
-                        <h2>View stats</h2>
-                    </div>
-                    <p>Views: 11</p>
-                    <p>Started: 7</p>
-                    <p>Completed: 3</p>
-                </div>
+        <% if (courses.length > 0) { %>
+            <div class="cards">
+                <% courses.forEach(course => { %>
+                    <a href="http://localhost:6789/course/<%= course._id %>/view">
+                        <div class="card" id="<%= course._id %>">
+                            <% if (course.thumbnail && course.thumbnail.data) { %>
+                                <img src="data:<%= course.thumbnail.mimeType %>;base64,<%= course.thumbnail.data %>" alt="Course Thumbnail">
+                            <% } else { %>
+                                <img src="../../public/images/default-placeholder.png" alt="Default Course Thumbnail">
+                            <% } %>    
+                            <p class="niche"><%= course.niche %></p>                    
+                            <div class="heading">
+                                <h5 class="title"><%= course.title %></h5>
+                                <img src="../public/images/dot.svg">
+                                <p class="courseDuration"><%= course.duration %></p>
+                            </div>
+                            <h6 class="author"><%= course.author %></h6>  
+                        </div>
+                    </a>
+                <% }) %>
             </div>
-            <div class="card">
-                <img src="../public/images/htmltut.jpg" class="courseImage">
-                <p class="niche">Tech</p>
-                <div class="heading">
-                    <h5 class="title">HTML for beginners</h5>
-                    <img src="../public/images/dot.svg">
-                    <p class="courseDuration">2 months</p>
-                </div>
-                <h6 class="author">Tamilore</h6>
-                <div class="overlay">
-                    <div>
-                        <h2>View stats</h2>
-                    </div>
-                    <p>Views: 11</p>
-                    <p>Started: 7</p>
-                    <p>Completed: 3</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="../public/images/htmltut.jpg" class="courseImage">
-                <p class="niche">Tech</p>
-                <div class="heading">
-                    <h5 class="title">HTML for beginners</h5>
-                    <img src="../public/images/dot.svg">
-                    <p class="courseDuration">2 months</p>
-                </div>
-                <h6 class="author">Tamilore</h6>
-                <div class="overlay">
-                    <div>
-                        <h2>View stats</h2>
-                    </div>
-                    <p>Views: 11</p>
-                    <p>Started: 7</p>
-                    <p>Completed: 3</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="../public/images/htmltut.jpg" class="courseImage">
-                <p class="niche">Tech</p>
-                <div class="heading">
-                    <h5 class="title">HTML for beginners</h5>
-                    <img src="../public/images/dot.svg">
-                    <p class="courseDuration">2 months</p>
-                </div>
-                <h6 class="author">Tamilore</h6>
-                <div class="overlay">
-                    <div>
-                        <h2>View stats</h2>
-                    </div>
-                    <p>Views: 11</p>
-                    <p>Started: 7</p>
-                    <p>Completed: 3</p>
-                </div>
-            </div>
-        </div>
+        <% } else { %>
+            <p>You have not Published any courses yet.</p>
+        <% } %>
     </section>
     <footer></footer>
 </body>

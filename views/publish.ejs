@@ -12,7 +12,11 @@
     <script src="../public/scripts/publish/extra.js" defer></script>
     <script src="../public/scripts/publish/upload.js" defer></script>
 </head>
-<body>
+<% if (courseId) { %>
+    <body id="<%= courseId %>"> 
+<% } else { %>
+    <body id="">
+<% } %>
     <%- include('partials/preloader') %>
     <div class="publish-header">
         <%- include('partials/header') %>
@@ -96,6 +100,6 @@
             </div>
         </section>
     </section>
-    <!-- <%- include('partials/settings') %> -->
+    <%- include('partials/settings') %>
 </body>
 </html>

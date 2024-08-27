@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eureka</title>
+    <link rel="stylesheet" href="../../public/css/courses/view.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../../public/scripts/view.js" defer></script>
+</head>
+<body>
+    <%- include('../partials/preloader') %>
+    <div class="nothing-header">
+        <%- include('../partials/header') %>
+    </div>
+    <section class="course" id="<%= course._id %>">
+        <section class="left">
+            <a>Start course</a>
+            <% if (user._id.toString() === course.userId.toString()) { %>
+                <a href="/deleteCourse/<%= course._id %>">Delete course</a>             
+            <% } %>
+        </section>
+        <section class="course-description">
+            <div class="image-info">
+                <img src="../../public/images/graphicds.png" alt="">
+                <div class="info">
+                    <p><%= course.niche %></p>
+                    <p><%= course.author %></p>
+                    <p><%= course.duration %></p>
+                </div>
+            </div>
+            <p class="title"><%= course.title %></p>
+            <p class="overview"><%= course.overview %></p>
+        </section>
+        <section class="section-list">
+            <% for( let index = 0; index < course.sections.length; index++ ) { %>
+                <div class="chapter" id="<%= course.sections[index]._id %>">
+                    <label>
+                        <input type="checkbox">
+                        Chapter <%= index + 1 %>
+                    </label>
+                </div>
+            <% } %>
+        </section>
+        <section class="cover">
+            <a href="/course/start/<%= course._id %>">Start course</a>
+        </section>
+    </section>
+    <%- include('../partials/settings') %>
+</body>
+</html>

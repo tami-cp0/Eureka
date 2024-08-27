@@ -16,19 +16,29 @@
         <%- include('../partials/courses-nav') %>
     </article>
     <section class="courses-view">
-        <div class="cards">
-            <div class="card">
-                <img src="../public/images/htmltut.jpg" class="courseImage">
-                <p class="niche">Tech</p>
-                <h6>Chapters: 3</h6>
-                <h6>Quiz: 3</h6>
-                <h6>Title: Not set</h6>
-                <h6>Duration: Not set</h6>
-                <div class="overlay">
-                    <a>Resume</a>
-                </div>
+        <% if (courses.length > 0) { %>
+            <div class="cards">
+                <% courses.forEach(course => { %>
+                    <div class="card" id="<%= course._id %>">
+                        <% if (course.thumbnail && course.thumbnail.data) { %>
+                            <img src="data:<%= course.thumbnail.mimeType %>;base64,<%= course.thumbnail.data %>" alt="Course Thumbnail">
+                        <% } else { %>
+                            <img src="../../public/images/default-placeholder.png" alt="Default Course Thumbnail">
+                        <% } %>                        
+                        <p class="niche"><%= course.niche ? course.niche : 'Not set' %></p>
+                        <h6>Chapters: <%= course.totalChapters %></h6>
+                        <h6>Quiz: <%= course.totalQuizzes %></h6>
+                        <h6>Title: <%= course.title ? course.title : 'Not set' %></h6>
+                        <h6>Duration: <%= course.duration ? course.duration : 'Not set' %></h6>
+                        <div class="overlay">
+                            <a href="/publish/<%= course._id %>">Resume</a>
+                        </div>
+                    </div>
+                <% }) %>
             </div>
-        </div>
+        <% } else { %>
+            <p>You have not drafted any courses yet.</p>
+        <% } %>
     </section>
     <footer></footer>
 </body>
