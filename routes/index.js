@@ -10,15 +10,15 @@ const router = Router()
 router.get('/signup', (req, res) => {
   res.render('signup');
 });
-router.post('/signup', UsersController.postNewUser);
+router.post('/signup', UsersController.postNewUser, AuthController.connect, (req, res) => {
+  res.redirect('/home');
+});
 
 router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.post('/login', AuthController.connect, (req, res) => {
-  res.redirect('/home');
-});
+router.post('/login', AuthController.connect);
 
 router.get('/logout', AuthController.loginRequired, AuthController.disconnect);
 
