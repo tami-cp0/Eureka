@@ -55,7 +55,7 @@ class CoursesController {
       return res.status(201).json({ courseId });
     }
   
-    return res.status(201).json({ redirect: `/courses/${courseId}/view`, courseId });
+    return res.status(201).json({ redirect: `/course/${courseId}/view`, courseId });
   }
 
   static async putCourse(req, res) {
@@ -115,9 +115,8 @@ class CoursesController {
       return res.status(201).json({ courseId });
     }
   
-    return res.status(201).json({ redirect: `/courses/${courseId}/view`, courseId });
+    return res.status(201).json({ redirect: `/course/${courseId}/view`, courseId });
   }
-
 
   static async viewCourse(req, res) {
     const { userId } = req.session;
@@ -134,20 +133,35 @@ class CoursesController {
         courseId,
         { $inc: { viewCount: 1 } },
         { new: true }
-      ).populate(['userId', 'chapters', 'quizzes']);
+      );
       
       if (!course) {
         return res.status(404).json({ error: 'Course not found' });
       }
 
+      if (course.userId !== user._id) {
+        const index = user.recents.indexOf(course._id);
+        if (index !== -1) {
+          user.recents.splice(index, 1);
+        }
 
-      return res.status(200).render('courses/view', { course });
+        // Add course._id to the beginning of the list
+        user.recents.unshift(course._id);
+
+        // Trim the list to only keep the top 10 recents
+        if (user.recents.length > 10) {
+          user.recents = user.recents.slice(0, 10);
+        }
+
+        await user.save();
+      }
+
+      return res.status(200).render('courses/view', { course, user });
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
-
 
   static async getCourse(req, res) {
     const { userId } = req.session;
@@ -176,7 +190,39 @@ class CoursesController {
     }
   }
 
-  static async getAllCourses(req, res) {
+  static async deleteCourse(req, res) {
+    const { userId } = req.session;
+  
+    try {
+      const courseId = req.params.courseId;
+      const user = await DB.User.findById(userId);
+      
+      if (!user) {
+        req.flash('error', 'Signup required');
+        return res.status(400).json({ redirect: '/signup' });
+      }
+  
+      const course = await DB.Course.findById(courseId);
+  
+      if (!course) {
+        return res.status(404).json({ error: 'Course not found' });
+      }
+  
+      if (course.userId.toString() !== userId.toString()) {
+        return res.status(401).json({ error: 'Unauthorized access' });
+      }
+  
+      await course.deleteOne(); // Delete the course from the database
+  
+      return res.status(200).redirect('/courses/published'); // Redirect after successful deletion
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+  
+
+  static async getCourses(req, res) {
     const { userId } = req.session;
 
     try {
@@ -186,18 +232,94 @@ class CoursesController {
         return res.status(400).json({ redirect: '/signup' });
       }
 
-      let courses = await DB.Course.find({
-        isDraft: false,
-        userId: { $ne: new ObjectId(userId) }
-      });      
-      if (!courses.length) { // Check if the array is empty
-        return res.status(404).json([]);
-      }
+      const courses = await DB.Course.find({ isDraft: false, userId });
 
-      return res.status(200).json(courses);
+      return res.status(200).render('courses/published', { courses })
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  static async getDrafts(req, res) {
+    const { userId } = req.session;
+
+    try {
+      const user = await DB.User.findById(userId);
+      if (!user) {
+        req.flash('error', 'Signup required');
+        return res.status(400).json({ redirect: '/signup' });
+      }
+
+      const courses = await DB.Course.find({ isDraft: true, userId });
+
+      return res.status(200).render('courses/drafts', { courses })
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  static async getPublished(req, res) {
+    const { userId } = req.session;
+
+    try {
+      const user = await DB.User.findById(userId);
+      if (!user) {
+        req.flash('error', 'Signup required');
+        return res.status(400).json({ redirect: '/signup' });
+      }
+
+      const courses = await DB.Course.find({ isDraft: false, userId });
+
+      return res.status(200).render('courses/published', { courses })
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  static async get10Courses(req, res) {
+    const { userId } = req.session;
+
+    try {
+        const user = await DB.User.findById(userId);
+        if (!user) {
+            req.flash('error', 'Signup required');
+            return res.status(400).json({ redirect: '/signup' });
+        }
+
+        const courses = await DB.Course.find({ isDraft: false, userId: { $ne: userId } })
+                                       .limit(10); // Get the first 10 courses
+
+        return courses;
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  static async getMoreCourses(req, res) {
+    const { userId } = req.session;
+    const { page } = req.query; // Expecting a query parameter 'page' for pagination
+    const coursesPerPage = 10;
+    const skip = (page - 1) * coursesPerPage;
+
+    try {
+        const user = await DB.User.findById(userId);
+        if (!user) {
+            req.flash('error', 'Signup required');
+            return res.status(400).json({ redirect: '/signup' });
+        }
+
+        const courses = await DB.Course.find({ isDraft: false, userId: { $ne: userId } })
+                                      .skip(skip) // Skip previous pages' courses
+                                      .limit(coursesPerPage); // Limit to 10 courses
+
+        return res.status(200).json(courses); // Return as JSON to be appended by the frontend
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 }
