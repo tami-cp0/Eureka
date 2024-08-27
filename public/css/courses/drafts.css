@@ -63,4 +63,9 @@ img,
     margin-top: 8px;
   }
 
-  
+.courses-view > p {
+  color: var(--subtext-color);
+  top: 200px;
+  font-size: 14px;
+  position: absolute;
+}

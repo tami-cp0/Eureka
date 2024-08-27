@@ -20,3 +20,11 @@ body > section {
     width: 90%;
     margin: 0 auto;
 }
+
+
+.courses-view > p {
+    color: var(--subtext-color);
+    top: 200px;
+    font-size: 14px;
+    position: absolute;
+  }

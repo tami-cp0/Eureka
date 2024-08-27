@@ -1,0 +1,178 @@
+@import './normalize.css';
+
+:root {
+    --primary-color: #EDF2F7;
+    --secondary-color: #1A202C;
+    --background-color: #E2F0FE;
+    --sub-background: #283041;
+    --subtext-color: #6A6E72;
+    --sub: #91B3FA;
+    --body: #f5f5f5;
+    --quiz-textarea: #dae0e7;
+}
+
+
+body {
+    background-color: var(--body);
+    font-family: 'Inter';
+}
+
+body > section {
+    height: 92%;
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.course {
+    display: flex;
+}
+
+
+.course .left {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.course .left a {
+    padding: 15px 30px;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.course .left a:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+
+.course-description {
+    width: 60%;
+    border-left: 2px solid var(--secondary-color);
+    border-right: 2px solid var(--secondary-color);
+    padding: 40px;
+}
+
+.course-description .image-info {
+    width: 100%;
+    height: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.course-description .image-info img {
+    max-height: 80%;
+    max-width: 100%;
+    border: 2px solid var(--secondary-color);
+    border-radius: 5px;
+}
+
+.image-info .info {
+    height: fit-content;
+    background-color: var(--secondary-color);
+    padding: 15px 0px;
+    border-radius: 10px;
+    display: flex;
+    color: var(--primary-color);
+    justify-content: space-evenly;
+}
+.image-info {
+    margin-bottom: 20px;
+}
+
+.image-info p {
+    background-color: var(--sub-background);
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.course-description .title {
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.course-description .overview {
+    height: 35%;
+    overflow-y: auto;
+}
+
+
+
+.section-list {
+    width: 15%;
+    background-color: var(--primary-color);
+    overflow-y: auto;
+    padding: 0 50px;
+}
+
+.section-list .chapter {
+    width: 100%;
+    height: 60px;
+    border-bottom: 2px solid var(--secondary-color);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.chapter label {
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    box-sizing: border-box;
+    width: 15px;
+    height: 15px;
+    padding: 2px;
+    border: 1px solid var(--secondary-color);
+    appearance: none;
+    background-color: transparent;
+    outline: none;
+    transition: all 0.1s;
+    border-radius: 2px;
+    margin-right: 35px;
+  }
+
+  input[type="checkbox"]:checked {
+    background-color: var(--secondary-color);
+    background-size: 8px 8px; /* Adjust size as needed */
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  input[type="checkbox"]:not(:disabled):checked {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 32 32" xml:space="preserve"><path style="fill: %23EDF2F7" d="M11.941,28.877l-11.941-11.942l5.695-5.696l6.246,6.246l14.364-14.364L32,8.818"/></svg>');
+  }
+  
+
+.cover {
+    position: fixed;
+    width: 20%;
+    background-color: rgba(245, 245, 245, 0.7);
+    right: 0;
+    bottom: 0;
+    z-index: -3;
+    height: 93vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease-in-out;
+}
+
+.cover > a {
+    padding: 15px 30px;
+    background-color: var(--sub-background);
+    color: var(--primary-color);
+}
