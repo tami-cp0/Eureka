@@ -1,4 +1,3 @@
-@import 'normalize.css';
 @import 'partials/cards.css';
 
 :root {
@@ -62,7 +61,10 @@ h1 {
     color: var(--primary-color);
 }
 
-.recents { height: 300px;}
+.recents {
+    height: fit-content;
+    margin-bottom: 100px;
+}
 .recents p {
     color: var(--subtext-color);
 }
@@ -73,7 +75,7 @@ h1 {
 
 .get-started {
     margin-top: 100px;
-    height: 200px;
+    height: fit-content;
     p {
        margin-top: 15px; 
        color: var(--subtext-color);
@@ -81,8 +83,8 @@ h1 {
     }
 }
 
-body > section:last-of-type {
-    height: 100px;
+.space-section {
+    height: 200px;
 }
 
 body > section > p {
