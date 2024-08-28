@@ -14,6 +14,10 @@
         <%- include('../partials/header') %>
     </div>
     <section class="course" id="<%= course._id %>">
+        <div class="status failed">
+            <img src="../../public/images/fail.svg">
+            <p></p>
+        </div>
         <section class="left">
             <a class="start">Start course</a>
             <% if (user._id.toString() === course.userId.toString()) { %>
@@ -43,7 +47,7 @@
             <% } %>
         </section>
         <section class="cover">
-            <a href="" class="start">Start course</a>
+            <a class="start">Start course</a>
         </section>
     </section>
     <%- include('../partials/settings') %>
