@@ -17,14 +17,19 @@ class UsersController {
     }
 
     if (password != confirm) {
-      req.flash('error', 'Password is not identical');
+      req.flash('password', 'Password is not identical');
+      return res.status(400).redirect('/signup');
+    }
+
+    if (password.length < 8) {
+      req.flash('password', 'Password must be up to 8 characters');
       return res.status(400).redirect('/signup');
     }
 
     const emailExists = await DB.User.findOne({ email });
 
     if (emailExists) { 
-      req.flash('error', 'Email already exists');
+      req.flash('email', 'Email already exists');
       return res.status(400).redirect('/signup');
     }
 

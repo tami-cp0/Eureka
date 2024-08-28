@@ -45,8 +45,8 @@
                 <div class="credential">
                     <div class="email">
                         <input type="email" id="email" name="email">
-                        <% if (flash.error) { %>
-                            <label for="email"><%= flash.error %></label>
+                        <% if (flash.email) { %>
+                            <label for="email" style="color: red;"><%= flash.email %></label>
                         <% } else { %>
                             <label for="email">Email</label>
                         <% } %>
@@ -57,7 +57,11 @@
                 <div class="credential">
                     <div class="password">
                         <input type="password" id="password" name="password">
-                        <label for="password">Password</label>
+                        <% if (flash.password) { %>
+                            <label for="password" style="color: red;"><%= flash.password %></label>
+                        <% } else { %>
+                            <label for="password">Password</label>
+                        <% } %>
                     </div>
                     <img id="eye" class="hide" src="../public/images/closedeye.svg">
                 </div>
