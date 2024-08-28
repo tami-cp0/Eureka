@@ -29,7 +29,7 @@ app.use(session({
   secret: process.env.SECRET_KEY,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false, maxAge: 86400 * 7 } // 1 week
+  cookie: { secure: true, maxAge: 86400 * 7 } // 1 week
 }));
 
 app.use(flash());
