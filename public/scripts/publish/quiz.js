@@ -71,7 +71,7 @@ $(() => {
       top: '20px',
       display: 'flex'
     });
-    $('.status.failed p').text('Sorry, starting a course is coming soon!');
+    $('.status.failed p').text('Sorry, quiz section is coming soon!');
 
     setTimeout(() => {
       $('.status.failed').fadeOut();
