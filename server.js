@@ -49,6 +49,7 @@ app.use(async (req, res, next) => {
     }
   } else {
     res.locals.user = null;
+    res.redirect('/home');
   }
   res.locals.flash = req.flash();
   next();
