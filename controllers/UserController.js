@@ -99,6 +99,22 @@ class UsersController {
       return res.redirect('/signup');
     }
   }
+
+  static async getRecents(req, res) {
+    const { userId } = req.session;
+    try {
+      const user = await DB.User.findById(userId).populate('recents');
+        if (!user) {
+            req.flash('error', 'Signup required');
+            return res.status(400).json({ redirect: '/signup' });
+        }
+
+      return user.recents; // Return the top 10 courses as JSON
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
 }
 
 export default UsersController;

@@ -322,6 +322,25 @@ class CoursesController {
         return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
+
+  static async getTopCourses(req, res) {
+    const { userId } = req.session;
+    try {
+      const user = await DB.User.findById(userId);
+        if (!user) {
+            req.flash('error', 'Signup required');
+            return res.status(400).json({ redirect: '/signup' });
+        }
+        const topCourses = await DB.Course.find({ isDraft: false, viewCount: { $gte: 1 }, userId: { $ne: userId } }) // Filter courses with at least one view
+        .sort({ viewCount: -1 }) // Sort by viewCount in descending order
+        .limit(10); // Limit to the top 10 courses
+
+      return topCourses; // Return the top 10 courses as JSON
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
 }
 
 export default CoursesController;
