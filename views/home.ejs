@@ -25,7 +25,7 @@
             <div class="cards">
                 <% recents.forEach(course => { %>
                     <% if (user._id.toString() !== course.userId.toString()) { %>
-                        <a href="http://localhost:6789/course/<%= course._id %>/view">
+                        <a href="https://eureka-1han.onrender.com/course/<%= course._id %>/view">
                             <div class="card" id="<%= course._id %>">
                                 <% if (course.thumbnail && course.thumbnail.data) { %>
                                     <img src="data:<%= course.thumbnail.mimeType %>;base64,<%= course.thumbnail.data %>" alt="Course Thumbnail">
@@ -57,7 +57,7 @@
             <div class="cards">
                 <% topCourses.forEach(course => { %>
                     <% if (user._id.toString() !== course.userId.toString()) { %>
-                        <a href="http://localhost:6789/course/<%= course._id %>/view">
+                        <a href="https://eureka-1han.onrender.com/course/<%= course._id %>/view">
                             <div class="card" id="<%= course._id %>">
                                 <% if (course.thumbnail && course.thumbnail.data) { %>
                                     <img src="data:<%= course.thumbnail.mimeType %>;base64,<%= course.thumbnail.data %>" alt="Course Thumbnail">
@@ -86,7 +86,7 @@
             <div class="cards">
                 <% courses.forEach(course => { %>
                     <% if (user._id.toString() !== course.userId.toString()) { %>
-                        <a href="http://localhost:6789/course/<%= course._id %>/view">
+                        <a href="https://eureka-1han.onrender.com/course/<%= course._id %>/view">
                             <div class="card" id="<%= course._id %>">
                                 <% if (course.thumbnail && course.thumbnail.data) { %>
                                     <img src="data:<%= course.thumbnail.mimeType %>;base64,<%= course.thumbnail.data %>" alt="Course Thumbnail">
