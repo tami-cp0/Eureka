@@ -15,7 +15,7 @@
     </div>
     <section class="course" id="<%= course._id %>">
         <section class="left">
-            <a>Start course</a>
+            <a class="start">Start course</a>
             <% if (user._id.toString() === course.userId.toString()) { %>
                 <a href="/deleteCourse/<%= course._id %>">Delete course</a>             
             <% } %>
@@ -43,7 +43,7 @@
             <% } %>
         </section>
         <section class="cover">
-            <a href="/course/start/<%= course._id %>">Start course</a>
+            <a href="" class="start">Start course</a>
         </section>
     </section>
     <%- include('../partials/settings') %>
