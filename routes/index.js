@@ -22,7 +22,7 @@ router.post('/login', AuthController.connect, (req, res) => {
 
 router.get('/logout', AuthController.loginRequired, AuthController.disconnect);
 
-router.delete('/deleteUser', AuthController.loginRequired, UsersController.deleteMe);
+router.get('/deleteUser', AuthController.loginRequired, UsersController.deleteMe);
 
 router.get('/', AuthController.loginRequired, (req, res) => {
   res.redirect('/home');
@@ -32,7 +32,9 @@ router.get('/', AuthController.loginRequired, (req, res) => {
 // main routes
 router.get('/home', AuthController.loginRequired, async (req, res) => {
   const courses = await CoursesController.get10Courses(req, res);
-  res.render('home', { courses });
+  const topCourses = await CoursesController.getTopCourses(req, res);
+  const recents = await UsersController.getRecents(req, res);
+  res.render('home', { courses, topCourses, recents });
 });
 
 router.get('/publish', AuthController.loginRequired, (req, res) => {
