@@ -58,10 +58,10 @@ $(() => {
   // if course already exists it should just update it
   if (courseId) {
     requestMethod = 'PUT';
-    requestURL = `http://localhost:6789/publish/${courseId}`; 
+    requestURL = `https://eureka-1han.onrender.com/publish/${courseId}`; 
   } else {
     requestMethod = 'POST';
-    requestURL = 'http://localhost:6789/publish';
+    requestURL = 'https://eureka-1han.onrender.com/publish';
   }
 
   $('.draftUpload').on('click', async () => {

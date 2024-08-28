@@ -3,7 +3,7 @@ $(() => {
 
   $('.showmore').on('click', () => {    
     $.ajax({
-      url: `http://localhost:6789/getMoreCourses?page=${page}`,
+      url: `https://eureka-1han.onrender.com/getMoreCourses?page=${page}`,
       type: 'GET',
       xhrFields: {
         withCredentials: true
@@ -13,7 +13,7 @@ $(() => {
         
         response.forEach(course => {
           const courseHTML = `
-              <a href="http://localhost:6789/course/${course._id}/view">
+              <a href="https://eureka-1han.onrender.com/course/${course._id}/view">
                 <div class="card" id="${course._id}">
                             ${course.thumbnail && course.thumbnail.data ? 
                                 `<img src="data:${course.thumbnail.mimeType};base64,${course.thumbnail.data}" alt="Course Thumbnail">` :
