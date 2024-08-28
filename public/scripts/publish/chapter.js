@@ -1,10 +1,14 @@
 window.count = 1; // track chapter and quiz order
-$(window).on('load', function() {
-  $('.preloader').stop(true, true).css({
-      'display': 'flex',
-      'opacity': '1'
+const courseId = $('body').attr('id');
+
+if (courseId) {
+  $(window).on('load', function() {
+    $('.preloader').stop(true, true).css({
+        'display': 'flex',
+        'opacity': '1'
+    });
   });
-});
+}
 
 // quill editor
 $(() => {
@@ -37,7 +41,6 @@ $(() => {
   }
 
 
-  const courseId = $('body').attr('id');
 
 
   if (courseId) {
