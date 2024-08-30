@@ -104,6 +104,9 @@ $(() => {
           }, 5000);
 
           $('body').attr('id', response.courseId);
+
+          // save it to session storage incase they refresh and it clears when you leave the page
+          sessionStorage.setItem('courseId', response.courseId);
         },
         error: function(xhr, status, error) {
           $('.status.loading').css({

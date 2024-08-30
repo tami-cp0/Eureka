@@ -1,5 +1,13 @@
 window.count = 1; // track chapter and quiz order
-const courseId = $('body').attr('id');
+let courseId = $('body').attr('id'); 
+
+// ensure saved data isnt lost with refresh
+if (!courseId) {
+  courseId = sessionStorage.getItem('courseId');
+}
+$(window).on('beforeunload', function() {
+  sessionStorage.removeItem('courseId');
+});
 
 if (courseId) {
   $(window).on('load', function() {
