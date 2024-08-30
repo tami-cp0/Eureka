@@ -13,9 +13,10 @@ class ChapterController {
       }
 
       const courseId = new ObjectId(req.params.courseId);
+      const course = await DB.Course.findById(courseId);
       const chapters = await DB.Chapter.find({ courseId });
 
-      return res.status(200).json(chapters);
+      return res.status(200).json({chapters, course});
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: 'Internal Server Error' });

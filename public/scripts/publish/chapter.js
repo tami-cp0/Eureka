@@ -48,19 +48,24 @@ $(() => {
     $.ajax({
       url: `/course/${courseId}/chapters`,
       method: 'GET',
-      success: function(chapters) {
+      success: function(response) {
         $('.preloader').fadeOut();
         // Remove any existing chapters (if necessary)
         $('.course-sections .chapter').remove();
         $('#page-container .page').remove();
-        console.log(chapters);
 
 
         // Reset count to the number of chapters loaded
-        count = chapters.length;
+        count = response.chapters.length;
 
+        // set the course-info section
+        $('#title').val(`${response.course.title}`)
+        $('#duration').val(`${response.course.duration}`)
+        $('#niche').val(`${response.course.niche}`)
+        $('#overview').val(`${response.course.overview}`)
+        $('#file-name').text(`${response.course.thumbnail.imageName}`)
 
-        chapters.forEach((chapter, index) => {
+        response.chapters.forEach((chapter, index) => {
           const chapterNumber = index + 1;
 
 
