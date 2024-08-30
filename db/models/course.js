@@ -9,6 +9,7 @@ const courseSchema = new mongoose.Schema({
   completedCount: { type: Number, default: 0 },
   startCount: { type: Number, default: 0 },
   thumbnail: {
+    imageName: { type: String, default: '' },
     data: { type: String, default: '' },
     mimeType: { type: String, default: '' }
   },
