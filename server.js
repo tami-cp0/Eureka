@@ -17,7 +17,8 @@ const port = process.env.PORT || 6789; // Default port if not set
 
 const allowedOrigins = ['https://www.tamilore.tech', 'https://tamilore.tech', 'https://eureka-1han.onrender.com', 'http://localhost:6789'];
 app.use(cors({
-    origin: allowedOrigins
+    origin: allowedOrigins,
+    credentials: true
 }));
 
 // Manually define __dirname for ES module
