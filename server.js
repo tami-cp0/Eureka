@@ -15,8 +15,10 @@ config();
 const app = express();
 const port = process.env.PORT || 6789; // Default port if not set
 
-// CORS setup
-// app.use(cors());
+const allowedOrigins = ['https://www.tamilore.tech', 'https://tamilore.tech', 'https://eureka-1han.onrender.com', 'http://localhost:6789'];
+app.use(cors({
+    origin: allowedOrigins
+}));
 
 // Manually define __dirname for ES module
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
