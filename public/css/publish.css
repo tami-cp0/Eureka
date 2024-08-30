@@ -383,9 +383,14 @@ textarea#overview::-webkit-scrollbar {
     cursor: pointer;
 }
 
+.buttons > button:hover {
+    color: var(--primary-color) !important;
+}
+
 .buttons > .delete a {
     color: var(--primary-color);
 }
+
 
 /* for quiz page */
 .page.quiz {
