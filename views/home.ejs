@@ -28,9 +28,9 @@
                         <a href="https://eureka-1han.onrender.com/course/<%= course._id %>/view">
                             <div class="card" id="<%= course._id %>">
                                 <% if (course.thumbnail && course.thumbnail.data) { %>
-                                    <img src="data:<%= course.thumbnail.mimeType %>;base64,<%= course.thumbnail.data %>" alt="Course Thumbnail">
+                                    <img src="data:<%= course.thumbnail.mimeType %>;base64,<%= course.thumbnail.data %>" alt="Course Thumbnail" loading="lazy">
                                 <% } else { %>
-                                    <img src="../../public/images/default-placeholder.png" alt="Default Course Thumbnail">
+                                    <img src="../../public/images/default-placeholder.png" alt="Default Course Thumbnail" loading="lazy">
                                 <% } %>    
                                 <p class="niche"><%= course.niche %></p>                    
                                 <div class="heading">
@@ -60,9 +60,9 @@
                         <a href="https://eureka-1han.onrender.com/course/<%= course._id %>/view">
                             <div class="card" id="<%= course._id %>">
                                 <% if (course.thumbnail && course.thumbnail.data) { %>
-                                    <img src="data:<%= course.thumbnail.mimeType %>;base64,<%= course.thumbnail.data %>" alt="Course Thumbnail">
+                                    <img src="data:<%= course.thumbnail.mimeType %>;base64,<%= course.thumbnail.data %>" alt="Course Thumbnail" loading="lazy">
                                 <% } else { %>
-                                    <img src="../../public/images/default-placeholder.png" alt="Default Course Thumbnail">
+                                    <img src="../../public/images/default-placeholder.png" alt="Default Course Thumbnail" loading="lazy">
                                 <% } %>    
                                 <p class="niche"><%= course.niche %></p>                    
                                 <div class="heading">
@@ -89,9 +89,9 @@
                         <a href="https://eureka-1han.onrender.com/course/<%= course._id %>/view">
                             <div class="card" id="<%= course._id %>">
                                 <% if (course.thumbnail && course.thumbnail.data) { %>
-                                    <img src="data:<%= course.thumbnail.mimeType %>;base64,<%= course.thumbnail.data %>" alt="Course Thumbnail">
+                                    <img src="data:<%= course.thumbnail.mimeType %>;base64,<%= course.thumbnail.data %>" alt="Course Thumbnail" loading="lazy">
                                 <% } else { %>
-                                    <img src="../../public/images/default-placeholder.png" alt="Default Course Thumbnail">
+                                    <img src="../../public/images/default-placeholder.png" alt="Default Course Thumbnail" loading="lazy">
                                 <% } %>    
                                 <p class="niche"><%= course.niche %></p>                    
                                 <div class="heading">
