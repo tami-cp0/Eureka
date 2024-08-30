@@ -31,10 +31,17 @@ router.get('/', AuthController.loginRequired, (req, res) => {
 
 // main routes
 router.get('/home', AuthController.loginRequired, async (req, res) => {
-  const courses = await CoursesController.get10Courses(req, res);
-  const topCourses = await CoursesController.getTopCourses(req, res);
-  const recents = await UsersController.getRecents(req, res);
-  res.render('home', { courses, topCourses, recents });
+  try {
+    const [courses, topCourses, recents] = await Promise.all([
+      CoursesController.get10Courses(req, res),
+      CoursesController.getTopCourses(req, res),
+      UsersController.getRecents(req, res)
+    ]);
+
+    res.render('home', { courses, topCourses, recents });
+  } catch (error) {
+    res.status(500).json({ status: 'fail', message: 'Failed to load data' });
+  }
 });
 
 router.get('/publish', AuthController.loginRequired, (req, res) => {
