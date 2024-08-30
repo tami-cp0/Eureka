@@ -81,7 +81,7 @@ router.get('/course/:courseId/view', AuthController.loginRequired, CoursesContro
 // router.get('course/start/:id', CoursesController.viewCourse);
 
 // router.get('/course/:courseId', CoursesController.getCourse);
-router.delete('/deleteCourse/:courseId', AuthController.loginRequired, CoursesController.deleteCourse);
+router.get('/deleteCourse/:courseId', AuthController.loginRequired, CoursesController.deleteCourse);
 
 
 // router.get('/courses', AuthController.loginRequired, CoursesController.getAllCourses);

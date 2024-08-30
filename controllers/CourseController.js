@@ -214,7 +214,11 @@ class CoursesController {
   
       await course.deleteOne(); // Delete the course from the database
   
-      return res.status(200).redirect('/courses/published'); // Redirect after successful deletion
+      if (course.isDraft === true) {
+        return res.status(200).redirect('/courses/drafts'); // Redirect after successful deletion
+      } else {
+        return res.status(200).redirect('/courses/published'); // Redirect after successful deletion
+      }
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: 'Internal Server Error' });
