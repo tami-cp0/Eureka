@@ -383,6 +383,10 @@ textarea#overview::-webkit-scrollbar {
     cursor: pointer;
 }
 
+.buttons > .delete a {
+    color: var(--primary-color);
+}
+
 /* for quiz page */
 .page.quiz {
     padding: 40px 80px;
