@@ -28,9 +28,10 @@ $(() => {
   
     const fileInput = $('#image')[0];
     const imageFile = fileInput.files[0];
+    const imageName = $('#file-name').text();
     let thumbnail;
     if (imageFile) {
-      thumbnail = { data: await imageToBase64(imageFile), type: imageFile.type};
+      thumbnail = { imageName, data: await imageToBase64(imageFile), type: imageFile.type};
     }
   
     const course = { title, duration, niche, overview, thumbnail };
