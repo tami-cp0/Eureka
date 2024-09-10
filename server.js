@@ -8,14 +8,16 @@ import cache from './db/cache.js';
 import RedisStore from 'connect-redis';
 import flash from 'connect-flash';
 import cors from 'cors';
+import https from 'https';
 import DB from './db/db.js';
 
 config();
 
 const app = express();
 const port = process.env.PORT || 6789; // Default port if not set
+const serverURL = 'https://eureka-1han.onrender.com';
 
-const allowedOrigins = ['https://www.tamilore.tech', 'https://tamilore.tech', 'https://eureka-1han.onrender.com', 'http://localhost:6789'];
+const allowedOrigins = ['https://www.tamilore.tech', 'https://tamilore.tech', `${serverURL}`, 'http://localhost:6789'];
 app.use(cors({
     origin: allowedOrigins,
     credentials: true
@@ -70,5 +72,11 @@ app.use('/load', (req, res) => {
 app.use(router);
 
 app.listen(port, () => {
-  console.log(`Eureka listening at http://localhost:${port}`);
+  console.log(`Eureka listening at ${serverURL}`);
 });
+
+setInterval(() => {
+  https.get(`${serverURL}/ping`).on('error', (error) => {
+    console.error('Error pinging server:', error);
+  });
+}, 300000);

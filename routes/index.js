@@ -6,6 +6,12 @@ import ChapterController from "../controllers/ChapterController.js";
 
 const router = Router()
 
+// keep render free server active
+router.get('/ping', (req, res) => {
+  console.log('ping');
+  return res.status(200).end();
+});
+
 // routes directly related to pages
 router.get('/signup', (req, res) => {
   res.render('signup');
