@@ -8,7 +8,6 @@ const router = Router()
 
 // keep render free server active
 router.get('/ping', (req, res) => {
-  console.log('ping');
   return res.status(200).end();
 });
 
